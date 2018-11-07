@@ -7,7 +7,10 @@
   height: $textfield-size;
   max-height: $textfield-size;
   border: $border-size solid $main-color;
-  
+  width: 100%;
+  margin: 0px !important;
+  padding: 0px !important;
+
   &:focus {
     border-color: $main-color;
     box-shadow: 5px 5px $main-color;

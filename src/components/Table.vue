@@ -1,5 +1,5 @@
 <template>
-  <b-container class="mt-4">
+  <b-container>
     <b-row>
       <b-col>
         <b-table :fields="fields" :items="tableMake.slice(0 + (vocaPagination - 1) * 50, 25 + (vocaPagination - 1) * 50)"

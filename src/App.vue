@@ -22,7 +22,7 @@
       </b-navbar>
     </div>
 
-    <body>
+    <body class="mt-4">
       <router-view></router-view>
 
     </body>

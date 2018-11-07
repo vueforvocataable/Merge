@@ -1,53 +1,35 @@
 <template>
   <div>
-    <b-container class="mt-4">
-
+    <b-container>
       <b-row>
-        <b-col>
-          <main class="header mt-2 mb-2">
-            <p>빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</p>
-          </main>
-        </b-col>
+        <span>빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</span>
+        <b-button-group size="sm" class="p-1 ml-auto mr-3">
+          <b-button class="btn" v-on:click="downloadVoca()">
+            <b-img width="35" height="35" :src="images.memo" alt="btn image" />
+            <span class="font-weight-bold">메모장으로 저장</span>
+          </b-button>
+          <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
+            <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
+            <span class="font-weight-bold">단어시험지 만들기</span>
+          </b-button>
+          <!-- <b-form-file class="btn" v-b-popover.hover="'엑셀파일 설명...'" title="사용법" type=file ref="excelFileInput"
+            v-on:change="excelToVoca()" accept=".xlsx" /> -->
+        </b-button-group>
       </b-row>
 
       <b-row>
-
-        <b-col sm="4" id="preview">
-          <vocatable :vocaProps="voca" :tableHeaderProp="vocaHeader"></vocatable>
-        </b-col>
-
-        <b-col sm="4">
-          <main class="main">
-            <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'" placeholder="영어단어, 한글
+        <b-col sm="6">
+          <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'" placeholder="영어단어, 한글
   Simple, 간단한
   Voca, 단어
   Test paper, 시험지 "
-              title="사용법" autofocus class="textfield" id="inputField" no-resize v-model="text" />
-          </main>
+            title="사용법" autofocus class="textfield" id="inputField" no-resize v-model="text" />
         </b-col>
-
-        <b-col sm="4">
-          <b-row>
-            <b-button-group vertical size="sm" class="w-100 p-1 mx-auto">
-              <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
-                <b-img width="35" height="35" :src="validationImage[1]" alt="left image" />
-                <span class="font-weight-bold">단어시험지 만들기</span>
-              </b-button>
-              <b-button class="btn" v-on:click="downloadVoca()">
-                <b-img width="35" height="35" :src="images.memo" alt="left image" />
-                <span class="font-weight-bold">메모장으로 저장</span>
-              </b-button>
-              <b-form-file class="btn" v-b-popover.hover="'엑셀파일 설명...'" title="사용법" type=file ref="excelFileInput"
-                v-on:change="excelToVoca()" accept=".xlsx" />
-            </b-button-group>
-          </b-row>
-          <b-row>
-
-          </b-row>
+        <b-col sm="6" >
+          <vocatable id="preview" :vocaProps="voca" :tableHeaderProp="vocaHeader"></vocatable>
         </b-col>
 
       </b-row>
-
       <b-row>
         <b-col>
           <b-card-group columns class="mt-4">
@@ -57,7 +39,6 @@
           </b-card-group>
         </b-col>
       </b-row>
-
     </b-container>
 
   </div>
@@ -81,14 +62,8 @@
         //텍스트 에이리어에 있는 텍스트를 담는 변수
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
-        voca: [{
-          "english": "Hello",
-          "korean": "안녕하세요"
-        }],
-        vocaHeader: [{
-          "english": "Hello",
-          "korean": "안녕하세요"
-        }],
+        voca: [],
+        vocaHeader: [],
         serverUrl: "https://vocatestsserver.herokuapp.com",
         remoteVocas: [],
         images: {
@@ -112,41 +87,6 @@
           return new Array(true, this.images.uncheck) //boolean값과 그에 맞는 사진 url을 반환
         }
         return new Array(false, this.images.check) //boolean값과 그에 맞는 사진 url을 반환
-      },
-       //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
-      reformText: function (text) {
-        text = text.replace(/\n/g, ",").split(',') //엔터값없애줌
-          .map((item) => { //공백없애줌
-            return item.trim();
-          })
-          .filter((item) => { //""값 없애줌
-            return item != "";
-          });
-
-        return text;
-      },
-      //유저가 작성한 텍스트를 테이블에 보낼 형식으로 바꿔주는 함수
-      formatTextToVoca: function (text) {
-        let vocaObj = new Array();
-        let cnt = 0;
-        let englishItemTemp;
-
-        text.forEach((item) => {
-          cnt++;
-          if (cnt % 2 == 1) {
-            englishItemTemp = item;
-          } else {
-            vocaObj.push({
-              "english": englishItemTemp,
-              "korean": item
-            });
-          }
-        });
-
-        this.vocaHeader = vocaObj.splice(0, 1);
-
-
-        return vocaObj;
       },
     },
     methods: {
@@ -197,6 +137,41 @@
             console.log(err);
           });
 
+      },
+      //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
+      reformText: function (text) {
+        text = text.replace(/\n/g, ",").split(',') //엔터값없애줌
+          .map((item) => { //공백없애줌
+            return item.trim();
+          })
+          .filter((item) => { //""값 없애줌
+            return item != "";
+          });
+
+        return text;
+      },
+      //유저가 작성한 텍스트를 테이블에 보낼 형식으로 바꿔주는 함수
+      formatTextToVoca: function (text) {
+        let vocaObj = new Array();
+        let cnt = 0;
+        let englishItemTemp;
+
+        text.forEach((item) => {
+          cnt++;
+          if (cnt % 2 == 1) {
+            englishItemTemp = item;
+          } else {
+            vocaObj.push({
+              "english": englishItemTemp,
+              "korean": item
+            });
+          }
+        });
+
+        this.vocaHeader = vocaObj.splice(0, 1);
+
+
+        return vocaObj;
       },
       //버튼클릭시 App.vue로 값을 보냄
       sendVocaToTable: function () {
@@ -290,5 +265,4 @@
       }
     }
   }
-
 </script>
