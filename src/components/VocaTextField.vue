@@ -22,7 +22,7 @@
 
       <b-row>
         <b-col sm="6">
-          <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'" placeholder="영어단어, 한글
+          <b-form-textarea v-b-popover.hover="'각 단어 사이는 \' , \'로 구분합니다.'" placeholder="영어단어, 한글
   Simple, 간단한
   Voca, 단어
   Test paper, 시험지 "
