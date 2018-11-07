@@ -12,8 +12,6 @@
             <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
             <span class="font-weight-bold">단어시험지 만들기</span>
           </b-button>
-          <!-- <b-form-file class="btn" v-b-popover.hover="'엑셀파일 설명...'" title="사용법" type=file ref="excelFileInput"
-            v-on:change="excelToVoca()" accept=".xlsx" /> -->
         </b-button-group>
       </b-row>
 
@@ -232,43 +230,6 @@
       saveDataOnLocalStorage: function () {
         if (this.vocaHeader.length < 1) return;
         localStorage.setItem('savedItems', JSON.stringify(this.vocaHeader.concat(this.voca)));
-      },
-      //엑셀파일을 텍스트필드에 사용할 형태로 바꿈
-      excelToVoca: function () {
-        let ref = this.$refs.excelFileInput;
-        let uploadedFiles = ref.$refs.input.files[0];
-        let reader = new FileReader();
-        let self = this;
-
-        if (uploadedFiles) this.isFileUploaded = true;
-
-        reader.onload = function (e) {
-          self.text = "";
-          let data = e.target.result;
-          data = new Uint8Array(data);
-          let workbook = XLSX.read(data, {
-            type: "array"
-          });
-
-          let first_sheet_name = workbook.SheetNames[0];
-          let worksheet = workbook.Sheets[first_sheet_name];
-          //It will prints with header and contents ex) Name, Home...
-          let json = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1
-          });
-
-          //Json to text
-          let key = 0;
-          let value = 1;
-          json.forEach(x => {
-            self.text += `${x[key]}, ${x[value]}\n`;
-          })
-        }
-        try {
-          reader.readAsArrayBuffer(uploadedFiles);
-        } catch (err) {
-          console.log(err.message)
-        }
       },
       copy: function (remoteVoca) {
         this.text = remoteVoca.voca
