@@ -28,7 +28,8 @@
   Test paper, 시험지 "
             title="사용법" autofocus class="textfield" id="inputField" no-resize v-model="text" />
         </b-col>
-        <b-col sm="6" >
+        <b-col sm="6">
+          <div id="preview-label">미리보기</div>
           <vocatable id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></vocatable>
         </b-col>
 
