@@ -26,7 +26,7 @@
             title="사용법" autofocus class="textfield" id="inputField" no-resize v-model="text" />
         </b-col>
         <b-col sm="6" >
-          <vocatable id="preview" :vocaProps="voca" :tableHeaderProp="vocaHeader"></vocatable>
+          <vocatable id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></vocatable>
         </b-col>
 
       </b-row>
@@ -62,8 +62,14 @@
         //텍스트 에이리어에 있는 텍스트를 담는 변수
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
-        voca: [],
-        vocaHeader: [],
+        voca: [{
+            "english": "",
+            "korean": ""
+          }],
+        vocaHeader: [{
+            "english": "",
+            "korean": ""
+          }],
         serverUrl: "https://vocatestsserver.herokuapp.com",
         remoteVocas: [],
         images: {
@@ -71,6 +77,12 @@
           uncheck: require('../assets/uncheck.png'),
           memo: require('../assets/memo.png')
         }
+      }
+    },
+    watch: {
+      text: function (text) {
+        let reformedText = this.reformText(text)
+        this.voca = this.formatTextToVoca(reformedText)
       }
     },
     created() {
@@ -119,7 +131,6 @@
             voca: text
           })
           .then(res => {
-            console.log(res);
           })
           .catch(err => {
             console.log(err);
@@ -170,13 +181,12 @@
 
         this.vocaHeader = vocaObj.splice(0, 1);
 
-
         return vocaObj;
       },
       //버튼클릭시 App.vue로 값을 보냄
       sendVocaToTable: function () {
-        this.text = this.reformText(this.text);
-        this.voca = this.formatTextToVoca(this.text);
+        let reformedText = this.reformText(this.text);
+        this.voca = this.formatTextToVoca(reformedText);
 
         //router에서 table로 값을 전달함
         this.$router.push({

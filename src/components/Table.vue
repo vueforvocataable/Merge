@@ -23,11 +23,6 @@
 </template>
 
 <script>
-  //TODO : 1. html태그 외부 파일로 두고, 변수하나로 묶기
-  //3. "", '' 중 어떤것 쓸지 통일하기 (Airbnb 코딩규칙 찾아보면 더 좋음)
-  //4. css 외부 파일로 두기
-  //5. 변수, 함수 이름 한번더 검토
-  //6. data부분 vue store찾아서 외부 파일로 두기
   import _ from 'underscore';
   export default {
     name: "Table",
@@ -45,6 +40,23 @@
           "english": "영어",
           "korean": "한글"
         }]
+      }
+    },
+    watch: {
+      vocaProp: function () {
+        this.init()
+      },
+      tableHeaderProp: function (header) {
+        this.fields.splice(1, 1, {
+          "class": "vocaWidth",
+          key: "english",
+          label: header[0].english
+        })
+        this.fields.splice(2, 1, {
+          "class": "vocaWidth",
+          key: "korean",
+          label: header[0].korean
+        })
       }
     },
     data() {
@@ -80,7 +92,6 @@
     //@returns: 
     created() {
       this.init();
-      console.log(this.vocaProp)
     },
     //vocas 랜덤으로 섞기
     methods: {
@@ -97,10 +108,15 @@
           "english": "",
           "korean": ""
         });
-        //공백에 단어를 넣어준다.
+
+        this.fillTableContent()
+      },
+      //단어를 넣어줌.
+      fillTableContent: function () {
         this.vocas = this.vocaProp;
+
         for (let i = 0; i < this.vocas.length; i++) {
-          this.tableMake[i] = this.vocas[i];
+          this.tableMake.splice(i, 1, this.vocas[i])
         }
       }
     },
