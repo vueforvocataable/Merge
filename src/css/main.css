@@ -1,21 +1,18 @@
 .nav {
-  background-color: white;
+  background-color: #c03444;
   -webkit-box-shadow: 0px 1px #c03444;
   box-shadow: 0px 1px #c03444;
   font-weight: bold; }
 
 a {
-  color: #c03444; }
+  color: #f88585; }
   a:hover {
-    color: #c03444;
+    color: #f88585;
     text-decoration: underline; }
   a:active {
-    color: #f88585; }
+    color: white; }
   a:focus {
-    color: #f88585; }
-
-.router-link-exact-active {
-  color: #c03444; }
+    color: white; }
 
 .table {
   word-wrap: break-word; }

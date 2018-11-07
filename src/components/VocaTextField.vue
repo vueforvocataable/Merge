@@ -1,9 +1,13 @@
 <template>
   <div>
     <b-container>
+      
       <b-row>
-        <span>빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</span>
-        <b-button-group size="sm" class="p-1 ml-auto mr-3">
+        <b-col sm="6">
+            <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
+        </b-col>
+        <b-col sm="6">
+        <b-button-group size="sm">
           <b-button class="btn" v-on:click="downloadVoca()">
             <b-img width="35" height="35" :src="images.memo" alt="btn image" />
             <span class="font-weight-bold">메모장으로 저장</span>
@@ -13,6 +17,7 @@
             <span class="font-weight-bold">단어시험지 만들기</span>
           </b-button>
         </b-button-group>
+        </b-col>
       </b-row>
 
       <b-row>
