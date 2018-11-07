@@ -1,0 +1,8 @@
+@import "../base/_colors";
+@import "../base/_size";
+
+#preview {
+  max-height: $preview-size;
+  overflow: auto;
+  border: $border-size solid $main-color;
+}

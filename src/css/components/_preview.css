@@ -1,0 +1,7 @@
+#preview {
+  max-height: 33rem;
+  overflow: auto;
+  background-color: green; }
+  #preview:focus {
+    -webkit-box-shadow: 5px 5px #c03444;
+    box-shadow: 5px 5px #c03444; }

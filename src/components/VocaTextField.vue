@@ -11,15 +11,18 @@
       </b-row>
 
       <b-row>
-        <b-col sm="8">
+
+        <b-col sm="4" id="preview">
+          <vocatable :vocaProps="voca" :tableHeaderProp="vocaHeader"></vocatable>
+        </b-col>
+
+        <b-col sm="4">
           <main class="main">
-            <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'"
-            placeholder=
-            "영어단어, 한글
+            <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'" placeholder="영어단어, 한글
   Simple, 간단한
   Voca, 단어
   Test paper, 시험지 "
-              title="사용법" autofocus class="text-field" id="inputField" no-resize :rows="20" :max-rows="20" v-model="text" />
+              title="사용법" autofocus class="textfield" id="inputField" no-resize v-model="text" />
           </main>
         </b-col>
 
@@ -61,6 +64,7 @@
 </template>
 
 <script>
+  import Table from './Table.vue';
   import {
     saveAs
   } from '@elastic/filesaver';
@@ -69,13 +73,22 @@
 
   export default {
     name: 'VocaTextField',
+    components: {
+      'vocatable': Table
+    },
     data() {
       return {
         //텍스트 에이리어에 있는 텍스트를 담는 변수
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
-        voca: [],
-        vocaHeader: [],
+        voca: [{
+          "english": "Hello",
+          "korean": "안녕하세요"
+        }],
+        vocaHeader: [{
+          "english": "Hello",
+          "korean": "안녕하세요"
+        }],
         serverUrl: "https://vocatestsserver.herokuapp.com",
         remoteVocas: [],
         images: {
@@ -94,63 +107,13 @@
       this.postVocas(this.voca);
     },
     computed: {
-        validationImage: function () {
+      validationImage: function () {
         if (this.checkTextValidation(this.text)) {
           return new Array(true, this.images.uncheck) //boolean값과 그에 맞는 사진 url을 반환
         }
         return new Array(false, this.images.check) //boolean값과 그에 맞는 사진 url을 반환
       },
-    },
-    methods: {
-       checkTextValidation: function (text) {
-        const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
-        const vocas = text.split("\n")
-
-        for (let i = 0; i < vocas.length; i++) {
-          if (vocas[i] == "") continue //공백일 경우 스킵
-
-          const result = csvRegexp.test(vocas[i])
-
-          if (!result) { 
-            return true
-          }
-        }
-        
-        return false
-      },
-      postVocas: function (voca) {
-        if (!voca || voca.length < 1) return;
-        let router = "/api/voca";
-
-        let text = "";
-        voca.forEach((x, index) => {
-          text += `${voca[index].english}, ${voca[index].korean}\n`; //서버에 보낼 형식
-        });
-
-        axios.post(this.serverUrl + router, {
-            voca: text
-          })
-          .then(res => {
-            console.log(res);
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      },
-      //서버로 부터 텍스트 받음
-      getVocas: function () {
-        let router = "/api/voca";
-
-        axios.get(this.serverUrl + router)
-          .then((res) => {
-            this.remoteVocas = res.data.vocas;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-      },
-      //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
+       //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
       reformText: function (text) {
         text = text.replace(/\n/g, ",").split(',') //엔터값없애줌
           .map((item) => { //공백없애줌
@@ -184,6 +147,56 @@
 
 
         return vocaObj;
+      },
+    },
+    methods: {
+      checkTextValidation: function (text) {
+        const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
+        const vocas = text.split("\n")
+
+        for (let i = 0; i < vocas.length; i++) {
+          if (vocas[i] == "") continue //공백일 경우 스킵
+
+          const result = csvRegexp.test(vocas[i])
+
+          if (!result) {
+            return true
+          }
+        }
+
+        return false
+      },
+      postVocas: function (voca) {
+        if (!voca || voca.length < 1) return;
+        let router = "/api/voca";
+
+        let text = "";
+        voca.forEach((x, index) => {
+          text += `${voca[index].english}, ${voca[index].korean}\n`; //서버에 보낼 형식
+        });
+
+        axios.post(this.serverUrl + router, {
+            voca: text
+          })
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      },
+      //서버로 부터 텍스트 받음
+      getVocas: function () {
+        let router = "/api/voca";
+
+        axios.get(this.serverUrl + router)
+          .then((res) => {
+            this.remoteVocas = res.data.vocas;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
       },
       //버튼클릭시 App.vue로 값을 보냄
       sendVocaToTable: function () {
@@ -272,9 +285,10 @@
           console.log(err.message)
         }
       },
-      copy: function(remoteVoca) {
+      copy: function (remoteVoca) {
         this.text = remoteVoca.voca
       }
     }
   }
+
 </script>
