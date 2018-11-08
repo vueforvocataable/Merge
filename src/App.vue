@@ -31,6 +31,7 @@
         <b-badge href="https://www.naver.com/" variant="light" class="mx-1">박정훈</b-badge>
         <b-badge href="https://www.naver.com/" variant="light" class="mx-1">홍정완</b-badge>
       </v-layout>
+      <div>&copy; Team xxx</div>
    
     </v-footer>
 
