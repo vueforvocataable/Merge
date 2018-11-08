@@ -21,8 +21,18 @@
 
     <body>
       <router-view></router-view>
-
     </body>
+
+    <v-footer class="pa-3" light>
+      <v-spacer></v-spacer>
+      <v-layout wrap >
+        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">정하늘</b-badge>
+        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">이은경</b-badge>
+        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">박정훈</b-badge>
+        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">홍정완</b-badge>
+      </v-layout>
+   
+    </v-footer>
 
   </div>
 </template>

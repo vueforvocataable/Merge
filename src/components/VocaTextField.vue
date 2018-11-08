@@ -1,22 +1,22 @@
 <template>
   <div>
     <b-container>
-      
+
       <b-row>
         <b-col sm="6">
-            <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
+          <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
         </b-col>
         <b-col sm="6">
-        <b-button-group size="sm">
-          <b-button class="btn" v-on:click="downloadVoca()">
-            <b-img width="35" height="35" :src="images.memo" alt="btn image" />
-            <span class="font-weight-bold">메모장으로 저장</span>
-          </b-button>
-          <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
-            <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
-            <span class="font-weight-bold">단어시험지 만들기</span>
-          </b-button>
-        </b-button-group>
+          <b-button-group size="sm">
+            <b-button class="btn" v-on:click="downloadVoca()">
+              <b-img width="35" height="35" :src="images.memo" alt="btn image" />
+              <span class="font-weight-bold">메모장으로 저장</span>
+            </b-button>
+            <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
+              <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
+              <span class="font-weight-bold">단어시험지 만들기</span>
+            </b-button>
+          </b-button-group>
         </b-col>
       </b-row>
 
@@ -45,26 +45,14 @@
       </b-row>
     </b-container>
 
-  <v-snackbar
-      v-model="snackbar.show"
-      :bottom="true"
-      :timeout="snackbar.timeout"
-      :multi-line="true"
-    >
-    <span v-html="snackbar.text"> {{snackbar.text}}</span>
-   
-      <v-btn
-        color="pink"
-        flat
-        @click="snackbar.show = false"
-      >
+    <v-snackbar v-model="snackbar.show" :bottom="true" :timeout="snackbar.timeout">
+      <span v-html="snackbar.text"> {{snackbar.text}}</span>
+
+      <v-btn color="pink" flat @click="snackbar.show = false">
         <span>닫기</span>
       </v-btn>
-        <v-btn
-        flat
-        @click="snackbar.show = false"
-      >
-      <a href="https://www.w3schools.com/" style="color:green;">열기</a>
+      <v-btn flat @click="snackbar.show = false">
+        <a href="https://www.w3schools.com/" style="color:green;">열기</a>
       </v-btn>
     </v-snackbar>
 
@@ -90,13 +78,13 @@
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
         voca: [{
-            "english": "",
-            "korean": ""
-          }],
+          "english": "",
+          "korean": ""
+        }],
         vocaHeader: [{
-            "english": "",
-            "korean": ""
-          }],
+          "english": "",
+          "korean": ""
+        }],
         serverUrl: "https://vocatestsserver.herokuapp.com",
         remoteVocas: [],
         images: {
@@ -106,7 +94,7 @@
         },
         snackbar: {
           show: true,
-          timeout: 10000, //10 sec
+          timeout: 6000, //6 sec
           text: '<span>사용 후기를 말씀해 주세요. </br>추첨을 통해서 소정의 상품을 드립니다.</span>'
         }
       }
@@ -162,8 +150,7 @@
         axios.post(this.serverUrl + router, {
             voca: text
           })
-          .then(res => {
-          })
+          .then(res => {})
           .catch(err => {
             console.log(err);
           })
@@ -270,4 +257,5 @@
       }
     }
   }
+
 </script>
