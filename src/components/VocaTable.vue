@@ -94,7 +94,7 @@
         bordered: true,
         blindEng: false,
         blindKor: false,
-        blindZigzag: true
+        blindZigzag: false
       }
     },
     //@desc: 테이블이 생성될때 들어오는 값
