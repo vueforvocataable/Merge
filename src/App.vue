@@ -23,7 +23,7 @@
       <router-view></router-view>
     </body>
 
-    <v-footer class="pa-3" light>
+    <v-footer class="pa-3 d-print-none" light>
       <v-spacer></v-spacer>
       <v-layout wrap >
         <b-badge href="https://www.naver.com/" variant="light" class="mx-1">정하늘</b-badge>
@@ -32,7 +32,6 @@
         <b-badge href="https://www.naver.com/" variant="light" class="mx-1">홍정완</b-badge>
       </v-layout>
       <div>&copy; Team xxx</div>
-   
     </v-footer>
 
   </div>

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-container class="d-print-none">
+    <b-container>
+      <div class="d-print-none">
       <a href="javascript:window.print()">
         <b-button class="btn btn-primary btn-lg">인쇄</b-button>
       </a>
@@ -13,6 +14,7 @@
         <b-form-checkbox class="checkbox" v-model="striped">줄무늬</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
       </span>
+      </div>
 
       <b-row class="mt-2">
         <b-col>
