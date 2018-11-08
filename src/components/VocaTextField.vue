@@ -45,6 +45,28 @@
       </b-row>
     </b-container>
 
+  <v-snackbar
+      v-model="snackbar.show"
+      :bottom="true"
+      :timeout="snackbar.timeout"
+    >
+    <span v-html="snackbar.text"> {{snackbar.text}}</span>
+   
+      <v-btn
+        color="pink"
+        flat
+        @click="snackbar.show = false"
+      >
+        <span>닫기</span>
+      </v-btn>
+        <v-btn
+        flat
+        @click="snackbar.show = false"
+      >
+      <a href="https://www.w3schools.com/" style="color:green;">열기</a>
+      </v-btn>
+    </v-snackbar>
+
   </div>
 </template>
 
@@ -80,6 +102,11 @@
           check: require('../assets/check.png'),
           uncheck: require('../assets/uncheck.png'),
           memo: require('../assets/memo.png')
+        },
+        snackbar: {
+          show: true,
+          timeout: 10000,
+          text: '<span>사용 후기를 말씀해 주세요. </br>추첨을 통해서 소정의 상품을 드립니다.</span>'
         }
       }
     },
