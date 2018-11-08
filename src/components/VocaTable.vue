@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4">
+  <div>
     <b-container class="d-print-none">
       <a href="javascript:window.print()">
         <b-button class="btn btn-primary btn-lg">인쇄</b-button>
@@ -13,10 +13,8 @@
         <b-form-checkbox class="checkbox" v-model="striped">줄무늬</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
       </span>
-    </b-container>
 
-    <b-container class="mt-4">
-      <b-row>
+      <b-row class="mt-2">
         <b-col>
           <b-table :fields="fields" :items="tableMake.slice(0,this.tableMake.length / 2)"
             :small="small" :striped="striped" :bordered="bordered">
@@ -112,6 +110,7 @@
         return tableindex + 1
       },
       Zigzag: function(value) {
+
         if(this.blindZigzag == true){
           return value % 2 ;
         }

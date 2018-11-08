@@ -49,6 +49,7 @@
       v-model="snackbar.show"
       :bottom="true"
       :timeout="snackbar.timeout"
+      :multi-line="true"
     >
     <span v-html="snackbar.text"> {{snackbar.text}}</span>
    
@@ -105,7 +106,7 @@
         },
         snackbar: {
           show: true,
-          timeout: 10000,
+          timeout: 10000, //10 sec
           text: '<span>사용 후기를 말씀해 주세요. </br>추첨을 통해서 소정의 상품을 드립니다.</span>'
         }
       }
