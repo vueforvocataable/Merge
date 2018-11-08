@@ -19,8 +19,6 @@
         <div>{{fields.label}}</div>
       </b-col>
     </b-row>
-
-    
   </b-container>
 </template>
 

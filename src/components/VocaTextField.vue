@@ -1,22 +1,22 @@
 <template>
   <div>
     <b-container>
-
+      
       <b-row>
         <b-col sm="6">
-          <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
+            <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
         </b-col>
         <b-col sm="6">
-          <b-button-group size="sm">
-            <b-button class="btn" v-on:click="downloadVoca()">
-              <b-img width="35" height="35" :src="images.memo" alt="btn image" />
-              <span class="font-weight-bold">메모장으로 저장</span>
-            </b-button>
-            <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
-              <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
-              <span class="font-weight-bold">단어시험지 만들기</span>
-            </b-button>
-          </b-button-group>
+        <b-button-group size="sm">
+          <b-button class="btn" v-on:click="downloadVoca()">
+            <b-img width="35" height="35" :src="images.memo" alt="btn image" />
+            <span class="font-weight-bold">메모장으로 저장</span>
+          </b-button>
+          <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
+            <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
+            <span class="font-weight-bold">단어시험지 만들기</span>
+          </b-button>
+        </b-button-group>
         </b-col>
       </b-row>
 
@@ -45,12 +45,6 @@
       </b-row>
     </b-container>
 
-    <!-- <v-snackbar v-model="snackbar.show" :bottom="true" :timeout="snackbar.timeout">
-      테스트 스낵바
-      <v-btn color="pink" flat @click="snackbar = false">
-        Close
-      </v-btn>
-    </v-snackbar> -->
   </div>
 </template>
 
@@ -73,24 +67,20 @@
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
         voca: [{
-          "english": "",
-          "korean": ""
-        }],
+            "english": "",
+            "korean": ""
+          }],
         vocaHeader: [{
-          "english": "",
-          "korean": ""
-        }],
+            "english": "",
+            "korean": ""
+          }],
         serverUrl: "https://vocatestsserver.herokuapp.com",
         remoteVocas: [],
         images: {
           check: require('../assets/check.png'),
           uncheck: require('../assets/uncheck.png'),
           memo: require('../assets/memo.png')
-        },
-        // snackbar: {
-        //   show: false,
-        //   timeout: 10000,
-        // },
+        }
       }
     },
     watch: {
@@ -144,7 +134,8 @@
         axios.post(this.serverUrl + router, {
             voca: text
           })
-          .then(res => {})
+          .then(res => {
+          })
           .catch(err => {
             console.log(err);
           })
@@ -251,5 +242,4 @@
       }
     }
   }
-
 </script>
