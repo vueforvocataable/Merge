@@ -5,7 +5,10 @@ import Routes from './routes/index.js'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+// import 'vuetify/dist/vuetify.min.css'
+// import Vuetify from 'vuetify'
+ 
+// Vue.use(Vuetify)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter) 
 const router = new VueRouter({

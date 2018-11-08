@@ -8,6 +8,7 @@
       <span class="checkbox-group">
         <b-form-checkbox class="checkbox" v-model="blindEng">영어 가리기</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="blindKor">뜻 가리기</b-form-checkbox>
+        <b-form-checkbox class="checkbox" v-model="blindZigzag">지그재그</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="small">작게</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="striped">줄무늬</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
@@ -17,28 +18,28 @@
     <b-container class="mt-4">
       <b-row>
         <b-col>
-          <b-table :fields="fields" :items="tableMake.slice(0 + (vocaPagination - 1) * 50, 25 + (vocaPagination - 1) * 50)"
+          <b-table :fields="fields" :items="tableMake.slice(0,this.tableMake.length / 2)"
             :small="small" :striped="striped" :bordered="bordered">
-            <template slot="index" slot-scope="data"> {{data.index + 1 +(vocaPagination - 1) * 50}} </template>
-            <template v-if="!blindEng" slot="english" slot-scope="data"> {{data.item.english}} </template>
-            <template v-if="!blindKor" slot="korean" slot-scope="data"> {{data.item.korean}} </template>
+            <template slot="index" slot-scope="data"> {{data.index + 1}} </template>
+            <template v-if="Zigzag(data.index) || !blindEng " slot="english" slot-scope="data"> {{data.item.english}} </template>
+            <template v-if="!blindKor || Zigzag(data.index + 1)" slot="korean" slot-scope="data"> {{data.item.korean}} </template>
           </b-table>
         </b-col>
         <b-col>
-          <b-table :v-model="this.fields.label" :fields="fields" :items="tableMake.slice(25 + (vocaPagination - 1) * 50, 50 + (vocaPagination - 1) * 50)"
+          <b-table :v-model="this.fields.label" :fields="fields" :items="tableMake.slice(this.tableMake.length / 2,this.tableMake.length)"
             :small="small" :striped="striped" :bordered="bordered">
-            <template slot="index" slot-scope="data"> {{data.index + 26 + (vocaPagination - 1) * 50}} </template>
-            <template v-if="!blindEng" slot="english" slot-scope="data"> {{data.item.english}} </template>
-            <template v-if="!blindKor" slot="korean" slot-scope="data"> {{data.item.korean}} </template>
+            <template slot="index" slot-scope="data"> {{indexNum(data.index) + data.index}} </template>
+            <template v-if="Zigzag(data.index) || !blindEng "  slot="english" slot-scope="data"> {{data.item.english}} </template>
+            <template v-if="!blindKor || Zigzag(data.index + 1)" slot="korean" slot-scope="data"> {{data.item.korean}} </template>
           </b-table>
           <div>{{fields.label}}</div>
         </b-col>
       </b-row>
     </b-container>
 
-    <div v-if="this.tableMake.length >= 51" class="d-print-none">
+    <!-- <div v-if="this.tableMake.length >= 51" class="d-print-none">
       <b-pagination align="center" size="md" :total-rows="this.tableMake.length" v-model="vocaPagination" :per-page="50"></b-pagination>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -87,12 +88,13 @@
         ],
         vocas: "",
         tableMake: "",
-        vocaPagination: 1,
+        // vocaPagination: 1,
         striped: false,
         small: false,
         bordered: true,
         blindEng: false,
         blindKor: false,
+        blindZigzag: true
       }
     },
     //@desc: 테이블이 생성될때 들어오는 값
@@ -101,8 +103,22 @@
     created() {
       this.init();
     },
+    computed : {
+    },
     //vocas 랜덤으로 섞기
     methods: {
+      indexNum:function(tableindex){
+        tableindex = this.tableMake.length / 2 
+        return tableindex + 1
+      },
+      Zigzag: function(value) {
+        if(this.blindZigzag == true){
+          return value % 2 ;
+        }
+        if(this.blindEng == true) {
+          return 0
+        }
+      },
       shuffle: function () {
         let suffled = _.shuffle(this.vocas);
         this.tableMake.splice(0, suffled.length, ...suffled);
@@ -124,5 +140,4 @@
       }
     },
   }
-
 </script>
