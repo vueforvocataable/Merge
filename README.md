@@ -1,7 +1,7 @@
 # voca-table
 > A Vue.js project
-텍스트 -> 영어 단어시험장으로 변환해주는 웹앱
-
+텍스트 -> 영어 단어시험장으로 변환해주는 웹 앱
+https://vocatests.herokuapp.com/#/textfield
 ## Let's Start
 
 ``` bash
