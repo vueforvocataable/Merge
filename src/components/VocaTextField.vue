@@ -155,20 +155,21 @@
         return false
       },
       postVocas: function (voca) {
-        if (!voca || voca.length < 1) return;
-        let router = "/api/voca";
+        if (!voca || voca.length < 1) return
+        let router = "/api/voca"
 
-        let text = "";
+        let text = ""
+        text += `${this.vocaHeader[0].english}, ${this.vocaHeader[0].korean}\n`
         voca.forEach((x, index) => {
-          text += `${voca[index].english}, ${voca[index].korean}\n`; //서버에 보낼 형식
-        });
+          text += `${voca[index].english}, ${voca[index].korean}\n` //서버에 보낼 형식
+        })
 
         axios.post(this.serverUrl + router, {
             voca: text
           })
           .then(res => {})
           .catch(err => {
-            console.log(err);
+            console.log(err)
           })
       },
       //서버로 부터 텍스트 받음

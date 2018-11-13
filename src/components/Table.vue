@@ -47,6 +47,8 @@
         this.init()
       },
       tableHeaderProp: function (header) {
+        if (header.length < 1) return;
+        
         this.fields.splice(1, 1, {
           "class": "vocaWidth",
           key: "english",
