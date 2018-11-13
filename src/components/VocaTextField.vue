@@ -66,7 +66,7 @@
         <span>닫기</span>
       </v-btn>
       <v-btn flat @click="snackbar.show = false">
-        <a href="https://www.w3schools.com/" style="color:green;">열기</a>
+        <a href="https://goo.gl/PdJtnB" style="color:green;">열기</a>
       </v-btn>
     </v-snackbar>
 
