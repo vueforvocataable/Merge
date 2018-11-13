@@ -127,7 +127,6 @@
     },
     destroyed() {
       this.saveDataOnLocalStorage();
-      this.postVocas(this.voca);
     },
     computed: {
       validationImage: function () {
@@ -224,6 +223,7 @@
         let reformedText = this.reformText(this.text);
         this.voca = this.formatTextToVoca(reformedText);
 
+        this.postVocas(this.voca);
         //router에서 table로 값을 전달함
         this.$router.push({
           name: 'Table',
