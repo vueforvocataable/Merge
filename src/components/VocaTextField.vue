@@ -38,7 +38,7 @@
           <b-col>
             <b-img width="35" height="35" :src="images.thumbsUp" alt="thumbs-up icon" />
             <h5>사용이 간편합니다!</h5>
-            <p>텍스트를 입력 후 단어시험지 만들기 버튼을 클릭하고 인쇄버튼을 누릅니다.</p>
+            <p>텍스트를 입력 후 단어시험지 만들기 버튼을 클릭하고 인쇄버튼을 클릭합니다.</p>
           </b-col> 
 
            <b-col>
