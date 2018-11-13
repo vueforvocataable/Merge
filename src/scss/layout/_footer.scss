@@ -1,0 +1,18 @@
+@import "../base/_size";
+
+.footer {
+  background-color: white !important;
+
+  #footer-text {
+    font-size: $footer-text-size;
+  }
+
+  #heart {
+    color: $main-color;
+    font-size: 2rem;
+  }
+
+  #year {
+    font-size: 1.3rem;
+  }
+}

@@ -23,10 +23,10 @@
       <router-view></router-view>
     </body>
 
-    <v-footer class="pa-3 d-print-none" light>
+    <v-footer class="pa-5 d-print-none footer" light>
       <v-spacer></v-spacer>
       <v-layout wrap >
-        &copy;2018 Team xxx - Made with ♥ for the people of the internet.
+        <span id="footer-text"><span id="year">&copy;2018</span> TestPaper - Made with <span id="heart">♥</span> for the people of the internet.</span>
       </v-layout>
     </v-footer>
 
