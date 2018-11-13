@@ -119,7 +119,7 @@
           this.tableMake.splice(i, 1, this.vocas[i])
         }
       }
-    },
+    }
   }
 
 </script>

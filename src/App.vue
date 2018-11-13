@@ -19,19 +19,15 @@
       </b-navbar>
     </div>
 
-    <body>
+    <body >
       <router-view></router-view>
     </body>
 
     <v-footer class="pa-3 d-print-none" light>
       <v-spacer></v-spacer>
       <v-layout wrap >
-        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">정하늘</b-badge>
-        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">이은경</b-badge>
-        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">박정훈</b-badge>
-        <b-badge href="https://www.naver.com/" variant="light" class="mx-1">홍정완</b-badge>
+        &copy;2018 Team xxx - Made with ♥ for the people of the internet.
       </v-layout>
-      <div>&copy; Team xxx</div>
     </v-footer>
 
   </div>

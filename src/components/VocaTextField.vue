@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container style="background-color:white;">
 
       <b-row>
         <b-col sm="6">
@@ -20,7 +20,7 @@
         </b-col>
       </b-row>
 
-      <b-row>
+      <b-row class="mt-2">
         <b-col sm="6">
           <b-form-textarea v-b-popover.hover="'각 단어 사이는 \' , \'로 구분합니다.'" placeholder="영어단어, 한글
   Simple, 간단한
@@ -32,11 +32,25 @@
           <div id="preview-label">미리보기</div>
           <vocatable id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></vocatable>
         </b-col>
-
       </b-row>
+
+      <b-row class="text-center explanation mt-5">
+          <b-col>
+            <b-img width="35" height="35" :src="images.thumbsUp" alt="thumbs-up icon" />
+            <h5>사용이 간편합니다!</h5>
+            <p>텍스트를 입력 후 단어시험지 만들기 버튼을 클릭하고 인쇄버튼을 누릅니다.</p>
+          </b-col> 
+
+           <b-col>
+             <b-img width="35" height="35" :src="images.chrome" alt="chrome icon" />
+            <h5>크롬 최적화</h5>
+            <p>TestPaper은 크롬에 최적화되어있습니다.</p>
+          </b-col>    
+      </b-row>
+
       <b-row>
         <b-col>
-          <b-card-group columns class="mt-4">
+          <b-card-group columns class="mt-5">
             <b-card class="card text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
               <pre v-on:click="copy(remoteVoca)">{{remoteVoca.voca}}</pre>
             </b-card>
@@ -90,7 +104,9 @@
         images: {
           check: require('../assets/check.png'),
           uncheck: require('../assets/uncheck.png'),
-          memo: require('../assets/memo.png')
+          memo: require('../assets/memo.png'),
+          thumbsUp: require('../assets/thumbs-up.svg'),
+          chrome: require('../assets/chrome.svg')
         },
         snackbar: {
           show: true,
