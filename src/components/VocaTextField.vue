@@ -5,7 +5,15 @@
       <b-row>
         <b-col sm="6">
           <b-button-group size="sm">
-            <b-dropdown right text="카테고리">
+            <b-button v-on:click="downloadVoca()">
+              <b-img width="35" height="35" :src="images.memo" alt="btn image" />
+              <span class="btn-font-size">메모장으로 저장</span>
+            </b-button>
+            <b-button :state="validationImage[0]" :disabled="validationImage[0]" @click="sendVocaToTable()">
+              <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
+              <span class="btn-font-size">단어시험지 만들기</span>
+            </b-button>
+            <b-dropdown left text="카테고리">
               <b-dropdown-header>영어</b-dropdown-header>
               <b-dropdown-item  @click="buttonGroup.category.text = 'TOEIC'">TOEIC</b-dropdown-item>
               <b-dropdown-item @click="buttonGroup.category.text = 'TEPS'">TEPS</b-dropdown-item>
@@ -15,14 +23,6 @@
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-item @click="buttonGroup.category.text = '기타'">기타</b-dropdown-item>              
             </b-dropdown>
-            <b-button v-on:click="downloadVoca()">
-              <b-img width="35" height="35" :src="images.memo" alt="btn image" />
-              <span class="btn-font-size">메모장으로 저장</span>
-            </b-button>
-            <b-button :state="validationImage[0]" :disabled="validationImage[0]" @click="sendVocaToTable()">
-              <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
-              <span class="btn-font-size">단어시험지 만들기</span>
-            </b-button>
           </b-button-group>
         </b-col>
 
@@ -34,7 +34,7 @@
       <b-row class="mt-2">
         <b-col sm="6">
           <div id="preview-label" v-cloak>{{buttonGroup.category.text}}</div>
-          <b-form-textarea v-b-popover.hover="'각 단어 사이는 \' , \'로 구분합니다.'" placeholder="영어단어, 한글
+          <b-form-textarea placeholder="영어단어, 한글
   Simple, 간단한
   Voca, 단어
   Test paper, 시험지 "
@@ -45,6 +45,9 @@
           <vocatable id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></vocatable>
         </b-col>
       </b-row>
+      <b-tooltip target="inputField" placement="right">
+        <span>각 단어 사이는 <strong>,</strong> 로 구분합니다.</span>
+      </b-tooltip>
 
       <b-row class="text-center explanation mt-5">
         <b-col>
