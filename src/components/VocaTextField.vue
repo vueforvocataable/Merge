@@ -3,6 +3,7 @@
     <b-container style="background-color:white;">
 
       <b-row>
+        <!-- 버튼 그룹 -->
         <b-col sm="6">
           <b-button-group size="sm">
             <b-button v-on:click="downloadVoca()">
@@ -15,40 +16,43 @@
             </b-button>
             <b-dropdown left text="카테고리">
               <b-dropdown-header>영어</b-dropdown-header>
-              <b-dropdown-item  @click="buttonGroup.category.text = 'TOEIC'">TOEIC</b-dropdown-item>
+              <b-dropdown-item @click="buttonGroup.category.text = 'TOEIC'">TOEIC</b-dropdown-item>
               <b-dropdown-item @click="buttonGroup.category.text = 'TEPS'">TEPS</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-header>일본어</b-dropdown-header>
               <b-dropdown-item @click="buttonGroup.category.text = 'JPLT'">JPLT</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="buttonGroup.category.text = '기타'">기타</b-dropdown-item>              
+              <b-dropdown-item @click="buttonGroup.category.text = '기타'">기타</b-dropdown-item>
             </b-dropdown>
           </b-button-group>
         </b-col>
-
+        <!-- 웹 한 줄 설명  -->
         <b-col sm="6">
           <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
         </b-col>
       </b-row>
 
+      <!-- 텍스트에어리아 -->
       <b-row class="mt-2">
         <b-col sm="6">
           <div id="preview-label" v-cloak>{{buttonGroup.category.text}}</div>
           <b-form-textarea placeholder="영어단어, 한글
   Simple, 간단한
   Voca, 단어
-  Test paper, 시험지 "
-            title="사용법" autofocus class="textfield" id="inputField" no-resize v-model="text" />
+  Test paper, 시험지 " title="사용법" autofocus
+            class="textfield" id="inputField" no-resize v-model="text" />
         </b-col>
         <b-col sm="6">
           <div id="preview-label">미리보기</div>
           <vocatable id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></vocatable>
         </b-col>
       </b-row>
+      <!-- 텍스트에어리아 호버 툴팁 -->
       <b-tooltip target="inputField" placement="right">
         <span>각 단어 사이는 <strong>,</strong> 로 구분합니다.</span>
       </b-tooltip>
 
+      <!-- 설명 칸 -->
       <b-row class="text-center explanation mt-5">
         <b-col>
           <b-img width="35" height="35" :src="images.thumbsUp" alt="thumbs-up icon" />
@@ -63,6 +67,19 @@
         </b-col>
       </b-row>
 
+      <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
+      <v-expansion-panel>
+        <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
+          <div slot="header">Item</div>
+          <v-card>
+            <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat.</v-card-text>
+          </v-card>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <!-- 사용자가 사용한 단어를 불러옴 -->
       <b-row>
         <b-col>
           <b-card-group columns class="mt-5">
