@@ -1,10 +1,11 @@
 @import "../base/_colors";
-
+//모든 부트스트렙 버튼에 속성 적용
 .btn {
   background-color: white;
   border-color: #DBDBDB;
   color: #c03546;
-
+  font-weight: bold;
+  font-size: 0.9rem;
   &:hover {
     background-color: $main-color;
     border-color: $main-color;
@@ -21,4 +22,9 @@
     border-color: $main-color;
     box-shadow: 5px 5px $shadow-color;
   }
+}
+
+.btn-font-size {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
