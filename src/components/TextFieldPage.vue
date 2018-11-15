@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container style="background-color:white;">
+    <b-container>
 
       <b-row>
         <!-- 버튼 그룹 -->
@@ -42,11 +42,14 @@
   Test paper, 시험지 " title="사용법" autofocus
             class="textfield" id="inputField" no-resize v-model="text" />
         </b-col>
+
+        <!-- 프리뷰 -->
         <b-col sm="6">
           <div id="preview-label">미리보기</div>
-          <vocatable id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></vocatable>
+          <preview id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></preview>
         </b-col>
       </b-row>
+
       <!-- 텍스트에어리아 호버 툴팁 -->
       <b-tooltip target="inputField" placement="right">
         <span>각 단어 사이는 <strong>,</strong> 로 구분합니다.</span>
@@ -68,16 +71,8 @@
       </b-row>
 
       <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
-      <v-expansion-panel>
-        <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
-          <div slot="header">Item</div>
-          <v-card>
-            <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.</v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+      <expansion-panel></expansion-panel>
+
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
       <b-row>
@@ -91,6 +86,7 @@
       </b-row>
     </b-container>
 
+    <!-- 스낵바 -->
     <v-snackbar v-model="snackbar.show" :bottom="true" :timeout="snackbar.timeout">
       <span v-html="snackbar.text"> {{snackbar.text}}</span>
 
@@ -106,7 +102,9 @@
 </template>
 
 <script>
-  import Table from './Table.vue';
+  import Preview from './Preview.vue';
+  import ExpansionPanel from './ExpansionPanel.vue';
+
   import {
     saveAs
   } from '@elastic/filesaver';
@@ -116,7 +114,8 @@
   export default {
     name: 'VocaTextField',
     components: {
-      'vocatable': Table
+      'preview': Preview,
+      'expansionPanel': ExpansionPanel,
     },
     data() {
       return {
@@ -138,7 +137,8 @@
           uncheck: require('../assets/uncheck.png'),
           memo: require('../assets/memo.png'),
           thumbsUp: require('../assets/thumbs-up.svg'),
-          chrome: require('../assets/chrome.svg')
+          chrome: require('../assets/chrome.svg'),
+          arrow: require('../assets/arrow.svg'),
         },
         snackbar: {
           show: true,
@@ -156,14 +156,15 @@
       text: function (text) {
         let reformedText = this.reformText(text)
         this.voca = this.formatTextToVoca(reformedText)
+        this.addTable()
       }
     },
     created() {
-      this.getSavedDataOnLocalStorage();
-      this.getVocas();
+      this.getSavedDataOnLocalStorage()
+      this.getVocas()
     },
     destroyed() {
-      this.saveDataOnLocalStorage();
+      this.saveDataOnLocalStorage()
     },
     computed: {
       validationImage: function () {
@@ -312,7 +313,7 @@
       },
       copy: function (remoteVoca) {
         this.text = remoteVoca.voca
-      }
+      },
     }
   }
 

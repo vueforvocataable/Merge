@@ -32,12 +32,14 @@ a {
   text-align: center; }
 
 .vocaWidth {
+  table-layout: fixed;
+  width: 45%;
   text-align: center; }
 
 @media print {
-  @page {
-    size: a4;
-    margin-top: 20mm; }
+  .a4 {
+    page-break-after: always;
+    margin-top: 10mm; }
   .table td {
     background-color: transparent !important; } }
 

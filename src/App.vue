@@ -13,7 +13,6 @@
             <b-nav-item>
               <router-link to="/table" replace>단어시험지</router-link>
             </b-nav-item>
-
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -34,12 +33,9 @@
 </template>
 
 <script>
-  // import Explanation from './components/Explanation.vue'
-
   export default {
     name: 'App',
     components: {
-      // Explanation
     },
     data: function () {
       return {}

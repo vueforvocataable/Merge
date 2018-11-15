@@ -16,7 +16,6 @@
           <template v-if="!blindEng" slot="english" slot-scope="data"> {{data.item.english}} </template>
           <template v-if="!blindKor" slot="korean" slot-scope="data"> {{data.item.korean}} </template>
         </b-table>
-        <div>{{fields.label}}</div>
       </b-col>
     </b-row>
   </b-container>
@@ -47,8 +46,6 @@
         this.init()
       },
       tableHeaderProp: function (header) {
-        if (header.length < 1) return;
-        
         this.fields.splice(1, 1, {
           "class": "vocaWidth",
           key: "english",
@@ -110,18 +107,15 @@
           "english": "",
           "korean": ""
         });
-
         this.fillTableContent()
       },
       //단어를 넣어줌.
       fillTableContent: function () {
         this.vocas = this.vocaProp;
-
         for (let i = 0; i < this.vocas.length; i++) {
           this.tableMake.splice(i, 1, this.vocas[i])
         }
       }
-    }
+    },
   }
-
 </script>
