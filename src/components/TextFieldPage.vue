@@ -16,16 +16,17 @@
             </b-button>
             <b-dropdown left text="카테고리">
               <b-dropdown-header>영어</b-dropdown-header>
-              <b-dropdown-item @click="buttonGroup.category.text = 'TOEIC'">TOEIC</b-dropdown-item>
-              <b-dropdown-item @click="buttonGroup.category.text = 'TEPS'">TEPS</b-dropdown-item>
+              <b-dropdown-item @click="buttonGroup.category.text='TOEIC'">TOEIC</b-dropdown-item>
+              <b-dropdown-item @click="buttonGroup.category.text='TEPS'">TEPS</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-header>일본어</b-dropdown-header>
-              <b-dropdown-item @click="buttonGroup.category.text = 'JPLT'">JPLT</b-dropdown-item>
+              <b-dropdown-item @click="buttonGroup.category.text='JPLT'">JPLT</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="buttonGroup.category.text = '기타'">기타</b-dropdown-item>
+              <b-dropdown-item @click="buttonGroup.category.text='기타'">기타</b-dropdown-item>
             </b-dropdown>
           </b-button-group>
         </b-col>
+
         <!-- 웹 한 줄 설명  -->
         <b-col sm="6">
           <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
@@ -44,7 +45,7 @@
         </b-col>
 
         <!-- 프리뷰 -->
-        <b-col sm="6">
+        <b-col sm="6" class="preview-container">
           <div id="preview-label">미리보기</div>
           <preview id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></preview>
         </b-col>
@@ -87,35 +88,27 @@
     </b-container>
 
     <!-- 스낵바 -->
-    <v-snackbar v-model="snackbar.show" :bottom="true" :timeout="snackbar.timeout">
-      <span v-html="snackbar.text"> {{snackbar.text}}</span>
-
-      <v-btn color="pink" flat @click="snackbar.show = false">
-        <span>닫기</span>
-      </v-btn>
-      <v-btn flat @click="snackbar.show = false">
-        <a href="https://goo.gl/PdJtnB" style="color:green;">열기</a>
-      </v-btn>
-    </v-snackbar>
+    <snackbar></snackbar>
 
   </div>
 </template>
 
 <script>
-  import Preview from './Preview.vue';
-  import ExpansionPanel from './ExpansionPanel.vue';
-
+  import Preview from './Preview.vue'
+  import ExpansionPanel from './ExpansionPanel.vue'
+  import Snackbar from './Snackbar.vue'
   import {
     saveAs
-  } from '@elastic/filesaver';
-  import XLSX from 'xlsx';
-  import axios from 'axios';
+  } from '@elastic/filesaver'
+  import XLSX from 'xlsx'
+  import axios from 'axios'
 
   export default {
     name: 'VocaTextField',
     components: {
       'preview': Preview,
       'expansionPanel': ExpansionPanel,
+      'snackbar': Snackbar,
     },
     data() {
       return {
@@ -140,11 +133,6 @@
           chrome: require('../assets/chrome.svg'),
           arrow: require('../assets/arrow.svg'),
         },
-        snackbar: {
-          show: true,
-          timeout: 6000, //6 sec
-          text: '<span>사용 후기를 말씀해 주세요. </br>추첨을 통해서 소정의 상품을 드립니다.</span>'
-        },
         buttonGroup: {
           category: {
             text: "기타",
@@ -156,7 +144,6 @@
       text: function (text) {
         let reformedText = this.reformText(text)
         this.voca = this.formatTextToVoca(reformedText)
-        this.addTable()
       }
     },
     created() {

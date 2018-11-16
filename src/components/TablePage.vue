@@ -48,9 +48,11 @@
 
       </div>
     </b-container>
-    <voca-table v-for="(items, index) in countTable" :key=" index" :is="items" :vocaProp="cutVoca(index)" :blindEng="blindEng"
-      :blindKor="blindKor" :blindZigzag="blindZigzag" :small="small" :striped="striped" :bordered="bordered"
-      :tableHeaderProp="tableHeaderProp" :isSuffle="isSuffle"></voca-table>
+    <div class="table-container">
+      <voca-table v-for="(items, index) in countTable" :key=" index" :is="items" :vocaProp="cutVoca(index)" :blindEng="blindEng"
+        :blindKor="blindKor" :blindZigzag="blindZigzag" :small="small" :striped="striped" :bordered="bordered"
+        :tableHeaderProp="tableHeaderProp" :isSuffle="isSuffle"></voca-table>
+    </div>
   </div>
 </template>
 

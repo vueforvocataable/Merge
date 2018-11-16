@@ -1,0 +1,16 @@
+.table-container {
+    .table {
+      word-wrap: break-word;
+    }
+  
+    .indexWidth {
+      width: 10%;
+      text-align: center;
+    }
+  
+    .vocaWidth {
+      table-layout: fixed;
+      width: 45%;
+      text-align: center;
+    }
+  }

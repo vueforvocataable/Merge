@@ -1,9 +1,12 @@
 @import "../base/_colors";
 @import "../base/_size";
 
-#preview {
-  max-height: $preview-size;
-  overflow: auto;
-  border: $border-size solid $main-color;
-  border-radius: 5px;
+.preview-container {
+  #preview {
+    text-align: center;
+    max-height: $preview-size;
+    overflow: auto;
+    border: $border-size solid $main-color;
+    border-radius: 5px;
+  }
 }
