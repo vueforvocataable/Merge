@@ -10,8 +10,8 @@
               <b-img width="35" height="35" :src="images.memo" alt="btn image" />
               <span class="btn-font-size">메모장으로 저장</span>
             </b-button>
-            <b-button :state="validationImage[0]" :disabled="validationImage[0]" @click="sendVocaToTable()">
-              <b-img width="35" height="35" :src="validationImage[1]" alt="btn image" />
+            <b-button :state="!validateText.validation" :disabled="!validateText.validation" @click="sendVocaToTable()">
+              <b-img width="35" height="35" :src="validateText.img" alt="btn image" />
               <span class="btn-font-size">단어시험지 만들기</span>
             </b-button>
             <b-dropdown left text="카테고리">
@@ -66,8 +66,8 @@
       <!-- 사용자가 사용한 단어를 불러옴 -->
       <b-row>
         <b-card-group columns class="mt-5">
-          <b-card class="card text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
-            <pre v-on:click="copy(remoteVoca)">{{remoteVoca.voca}}</pre>
+          <b-card class="card text-center" v-for="(remoteWords, index) in remoteVocas" :key="index">
+            <pre v-on:click="copy(remoteWords)">{{remoteWords.voca | snippet}}</pre>
           </b-card>
         </b-card-group>
       </b-row>
@@ -87,7 +87,6 @@
   import {
     saveAs
   } from '@elastic/filesaver'
-  // import XLSX from 'xlsx'
   import axios from 'axios'
 
   export default {
@@ -141,31 +140,31 @@
       this.saveDataOnLocalStorage()
     },
     computed: {
-      validationImage: function () {
-        if (this.checkTextValidation(this.text)) {
-          return new Array(true, this.images.uncheck) //boolean값과 그에 맞는 사진 url을 반환
-        }
-        return new Array(false, this.images.check) //boolean값과 그에 맞는 사진 url을 반환
-      },
-    },
-    methods: {
-      checkTextValidation: function (text) {
+      validateText: function () {
         const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
-        const vocas = text.split("\n")
+        const vocas = this.text.split("\n")
 
         for (let i = 0; i < vocas.length; i++) {
           if (vocas[i] == "") continue //공백일 경우 스킵
 
           const result = csvRegexp.test(vocas[i])
 
-          //TODO: test를 통과하지 못 했을 때 false반환으로 수정하기
-          if (!result) {
-            return true
+          //정규식을 통과하지 못 하면 사진과 false반환
+          if (result == false) {
+            return {
+              validation: false,
+              img: this.images.uncheck
+            }
           }
         }
 
-        return false
+        return {
+          validation: true,
+          img: this.images.check
+        }
       },
+    },
+    methods: {
       postVocas: function (voca) {
         if (!voca || voca.length < 1) return
         let router = "/api/voca"
@@ -286,8 +285,8 @@
         if (this.vocaHeader.length < 1) return;
         localStorage.setItem('savedItems', JSON.stringify(this.vocaHeader.concat(this.voca)));
       },
-      copy: function (remoteVoca) {
-        this.text = remoteVoca.voca
+      copy: function (remoteWords) {
+        this.text = remoteWords.voca
       },
     }
   }

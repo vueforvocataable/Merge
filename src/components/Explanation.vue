@@ -9,7 +9,7 @@
         <b-col>
           <b-img width="35" height="35" :src="images.chrome" alt="chrome icon" />
           <h5>크롬 최적화</h5>
-          <p>TestPaper은 크롬에 최적화되어있습니다.</p>
+          <p>TestPaper은 크롬에 최적화되어 있습니다.</p>
         </b-col>
       </b-row>
 </template>
