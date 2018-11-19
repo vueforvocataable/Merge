@@ -60,18 +60,16 @@
       <explanation class="mt-5"></explanation>
 
       <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
-      <expansion-panel class="mt-5"></expansion-panel>
+      <category class="mt-5"></category>
 
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
       <b-row>
-        <b-col>
-          <b-card-group columns class="mt-5">
-            <b-card class="card text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
-              <pre v-on:click="copy(remoteVoca)">{{remoteVoca.voca}}</pre>
-            </b-card>
-          </b-card-group>
-        </b-col>
+        <b-card-group columns class="mt-5">
+          <b-card class="card text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
+            <pre v-on:click="copy(remoteVoca)">{{remoteVoca.voca}}</pre>
+          </b-card>
+        </b-card-group>
       </b-row>
     </b-container>
 
@@ -83,20 +81,20 @@
 
 <script>
   import Preview from './Preview.vue'
-  import ExpansionPanel from './ExpansionPanel.vue'
+  import Category from './Category.vue'
   import Snackbar from './Snackbar.vue'
   import Explanation from './Explanation.vue'
   import {
     saveAs
   } from '@elastic/filesaver'
-  import XLSX from 'xlsx'
+  // import XLSX from 'xlsx'
   import axios from 'axios'
 
   export default {
     name: 'VocaTextField',
     components: {
       'preview': Preview,
-      'expansionPanel': ExpansionPanel,
+      'Category': Category,
       'snackbar': Snackbar,
       'explanation': Explanation,
     },
@@ -114,6 +112,7 @@
           "korean": ""
         }],
         serverUrl: "https://vocatestsserver.herokuapp.com",
+        // serverUrl: "http://localhost:5001",
         remoteVocas: [],
         images: {
           check: require('../assets/check.png'),
@@ -159,6 +158,7 @@
 
           const result = csvRegexp.test(vocas[i])
 
+          //TODO: test를 통과하지 못 했을 때 false반환으로 수정하기
           if (!result) {
             return true
           }
