@@ -22,7 +22,7 @@
               <b-dropdown-header>일본어</b-dropdown-header>
               <b-dropdown-item @click="buttonGroup.category.text='JPLT'">JPLT</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="buttonGroup.category.text='기타'">기타</b-dropdown-item>
+              <b-dropdown-item @click="buttonGroup.category.text='ETC'">ETC</b-dropdown-item>
             </b-dropdown>
           </b-button-group>
         </b-col>
@@ -62,7 +62,6 @@
       <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
       <category class="mt-5"></category>
 
-
       <!-- 사용자가 사용한 단어를 불러옴 -->
       <b-row>
         <b-card-group columns class="mt-5">
@@ -81,7 +80,7 @@
 
 <script>
   import Preview from './Preview.vue'
-  import Category from './Category.vue'
+  import category from './category.vue'
   import Snackbar from './Snackbar.vue'
   import Explanation from './Explanation.vue'
   import {
@@ -93,7 +92,7 @@
     name: 'VocaTextField',
     components: {
       'preview': Preview,
-      'Category': Category,
+      'category': category,
       'snackbar': Snackbar,
       'explanation': Explanation,
     },
@@ -110,8 +109,8 @@
           "english": "",
           "korean": ""
         }],
-        serverUrl: "https://vocatestsserver.herokuapp.com",
-        // serverUrl: "http://localhost:5001",
+        //serverUrl: "https://vocatestsserver.herokuapp.com",
+        serverUrl: "http://localhost:5001",
         remoteVocas: [],
         images: {
           check: require('../assets/check.png'),
@@ -121,7 +120,7 @@
         },
         buttonGroup: {
           category: {
-            text: "기타",
+            text: "ETC",
           },
         },
       }
@@ -134,7 +133,6 @@
     },
     created() {
       this.getSavedDataOnLocalStorage()
-      this.getVocas()
     },
     destroyed() {
       this.saveDataOnLocalStorage()
@@ -176,25 +174,14 @@
         })
 
         axios.post(this.serverUrl + router, {
-            voca: text
+            voca: text,
+            category: this.buttonGroup.category.text
           })
-          .then(res => {})
+          .then(res => {
+          })
           .catch(err => {
             console.log(err)
           })
-      },
-      //서버로 부터 텍스트 받음
-      getVocas: function () {
-        let router = "/api/voca";
-
-        axios.get(this.serverUrl + router)
-          .then((res) => {
-            this.remoteVocas = res.data.vocas;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
       },
       //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
       reformText: function (text) {

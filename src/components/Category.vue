@@ -11,6 +11,7 @@
         <pre>{{words.voca | snippet}}</pre>
         <b-button-group>
           <b-form method="get" target="_blank" :action="serverUrl + '/api/voca/template/' + words._id" >
+            <!-- 쿼리 보내기위한 hidden input -->
             <input type="hidden" name="category" :value="words.category" />
             <input type="submit" value="전체보기" />
           </b-form>
