@@ -47,7 +47,7 @@
         <!-- 프리뷰 -->
         <b-col sm="6" class="preview-container">
           <div id="preview-label">미리보기</div>
-          <preview id="preview" :vocaProp="voca" :tableHeaderProp="vocaHeader"></preview>
+          <preview id="preview" :vocaProp="voca" :vocaHeaderProp="vocaHeader"></preview>
         </b-col>
       </b-row>
 
@@ -63,10 +63,10 @@
       <category class="mt-5"></category>
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
-      <my-words></my-words>
+      <my-words :vocaProp="voca" :vocaHeaderProp="vocaHeader"></my-words>
       
     </b-container>
-    
+
     <!-- 스낵바 -->
     <snackbar></snackbar>
 

@@ -1,7 +1,7 @@
 <template>
   <b-card-group columns class="mt-5">
-    <b-card class="card text-center" v-for="(Words, index) in localStorage.myWords" :key="index">
-      <pre>{{Words | snippet}}</pre>
+    <b-card class="card text-center" v-for="(words, index) in localStorage.myWords" :key="index">
+      <pre>{{words | snippet}}</pre>
     </b-card>
   </b-card-group>
 </template>
@@ -9,7 +9,16 @@
 <script>
   export default {
     name: "Explanation",
-    props: {},
+    props: {
+      vocaProp: {
+        type: Array,
+        default: () => []
+      },
+      vocaHeaderProp: {
+        type: Array,
+        default: () => []
+      }
+    },
     watch: {},
     data() {
       return {
@@ -48,9 +57,9 @@
       },
       //값을 전달하기전 로컬스토리지에 저장한다
       saveDataOnLocalStorage: function () {
-        if (this.vocaHeader.length < 1) return
+        if (this.vocaHeaderProp.length < 1 || this.vocaProp.length < 1) return
 
-        localStorage.setItem(Date.now(), JSON.stringify(this.vocaHeader.concat(this.voca)))
+        localStorage.setItem(Date.now(), JSON.stringify(this.vocaHeaderProp.concat(this.vocaProp)))
         this.deleteOldDataOnLocalStorage()
       },
       //최신단어 limit 개만 남김

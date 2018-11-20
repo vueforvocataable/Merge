@@ -31,7 +31,7 @@
           "korean": "안녕하세요"
         }]
       },
-      tableHeaderProp: {
+      vocaHeaderProp: {
         type: Array,
         default: () => [{
           "english": "영어",
@@ -43,7 +43,7 @@
       vocaProp: function () {
         this.init()
       },
-      tableHeaderProp: function (header) {
+      vocaHeaderProp: function (header) {
         this.fields.splice(1, 1, {
           "class": "vocaWidth",
           key: "english",
@@ -66,12 +66,12 @@
           {
             "class": "vocaWidth",
             key: "english",
-            label: this.tableHeaderProp[0].english
+            label: this.vocaHeaderProp[0].english
           },
           {
             "class": "vocaWidth",
             key: "korean",
-            label: this.tableHeaderProp[0].korean
+            label: this.vocaHeaderProp[0].korean
           }
         ],
         vocas: "",
