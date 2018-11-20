@@ -26,17 +26,11 @@
     props: {
       vocaProp: {
         type: Array,
-        default: () => [{
-          "english": "Hello",
-          "korean": "안녕하세요"
-        }]
+        default: () => []
       },
       vocaHeaderProp: {
         type: Array,
-        default: () => [{
-          "english": "영어",
-          "korean": "한글"
-        }]
+        default: () => []
       }
     },
     watch: {
@@ -44,6 +38,8 @@
         this.init()
       },
       vocaHeaderProp: function (header) {
+        if (!header[0]) return
+
         this.fields.splice(1, 1, {
           "class": "vocaWidth",
           key: "english",
@@ -66,12 +62,12 @@
           {
             "class": "vocaWidth",
             key: "english",
-            label: this.vocaHeaderProp[0].english
+            label: this.vocaHeaderProp[0] ? this.vocaHeaderProp[0].english : ""
           },
           {
             "class": "vocaWidth",
             key: "korean",
-            label: this.vocaHeaderProp[0].korean
+            label: this.vocaHeaderProp[0] ? this.vocaHeaderProp[0].korean : ""
           }
         ],
         vocas: "",
@@ -95,7 +91,9 @@
       },
       //단어 넣기
       fillTableContent: function () {
-        this.vocas = this.vocaProp;
+        if (!this.vocaProp) this.vocas = ""
+        this.vocas = this.vocaProp
+        
         for (let i = 0; i < this.vocas.length; i++) {
           this.createTable.splice(i, 1, this.vocas[i])
         }

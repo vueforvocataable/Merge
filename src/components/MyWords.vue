@@ -57,7 +57,7 @@
       },
       //값을 전달하기전 로컬스토리지에 저장한다
       saveDataOnLocalStorage: function () {
-        if (this.vocaHeaderProp.length < 1 || this.vocaProp.length < 1) return
+        if (this.vocaHeaderProp.length + this.vocaProp.length < 2) return
 
         localStorage.setItem(Date.now(), JSON.stringify(this.vocaHeaderProp.concat(this.vocaProp)))
         this.deleteOldDataOnLocalStorage()

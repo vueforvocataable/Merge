@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container class="px-0">
 
       <b-row>
         <!-- 버튼 그룹 -->
@@ -98,14 +98,8 @@
         //텍스트 에이리어에 있는 텍스트를 담는 변수
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
-        voca: [{
-          "english": "",
-          "korean": ""
-        }],
-        vocaHeader: [{
-          "english": "",
-          "korean": ""
-        }],
+        voca: [],
+        vocaHeader: [],
         //serverUrl: "https://vocatestsserver.herokuapp.com",
         serverUrl: "http://localhost:5001",
         remoteVocas: [],
