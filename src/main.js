@@ -18,23 +18,35 @@ const router = new VueRouter({
   routes: Routes
 })
 
-const sliceTextToWords = function(text, limit) {
-  const words = text.split("\n").slice(0, limit)
-  return words
-}
+const textWithDots = function(text, limit) {
+  let words = text.split("\n")
 
-const TurnWordsToTextWithDots = function(words, limit) {
+  let isOverLimit = false
+  if (words.length > limit) {
+    isOverLimit = true
+  } 
+
+  words = words.slice(0, limit)
+  
   let slicedText = ""
   for (let i = 0; i < limit; i++) {
+    if (words[i] === undefined) {
+      continue
+    }
+
     slicedText += words[i] + "\n"
   }
-  return slicedText + "..."
+
+  if (isOverLimit) {
+    return slicedText + "..."
+  }
+
+  return slicedText
 }
 Vue.filter('snippet', function(text) {
   const wordsLimit = 20
 
-  let words = sliceTextToWords(text, wordsLimit)
-  return TurnWordsToTextWithDots(words, wordsLimit)
+  return textWithDots(text, wordsLimit)
 })
 
 router.replace({ path: "textfield" })

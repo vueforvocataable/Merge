@@ -63,15 +63,10 @@
       <category class="mt-5"></category>
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
-      <b-row>
-        <b-card-group columns class="mt-5">
-          <b-card class="card text-center" v-for="(remoteWords, index) in remoteVocas" :key="index">
-            <pre v-on:click="copy(remoteWords)">{{remoteWords.voca | snippet}}</pre>
-          </b-card>
-        </b-card-group>
-      </b-row>
+      <my-words></my-words>
+      
     </b-container>
-
+    
     <!-- 스낵바 -->
     <snackbar></snackbar>
 
@@ -83,6 +78,7 @@
   import category from './category.vue'
   import Snackbar from './Snackbar.vue'
   import Explanation from './Explanation.vue'
+  import MyWords from './MyWords.vue'
   import {
     saveAs
   } from '@elastic/filesaver'
@@ -91,6 +87,7 @@
   export default {
     name: 'VocaTextField',
     components: {
+      'my-words': MyWords,
       'preview': Preview,
       'category': category,
       'snackbar': Snackbar,
@@ -131,12 +128,6 @@
         this.voca = this.formatTextToVoca(reformedText)
       }
     },
-    created() {
-      this.getSavedDataOnLocalStorage()
-    },
-    destroyed() {
-      this.saveDataOnLocalStorage()
-    },
     computed: {
       validateText: function () {
         const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
@@ -170,15 +161,14 @@
         let text = ""
         text += `${this.vocaHeader[0].english}, ${this.vocaHeader[0].korean}\n`
         voca.forEach((x, index) => {
-          text += `${voca[index].english}, ${voca[index].korean}\n` //서버에 보낼 형식
+          text += `${voca[index].english}, ${voca[index].korean}\n`
         })
 
         axios.post(this.serverUrl + router, {
             voca: text,
             category: this.buttonGroup.category.text
           })
-          .then(res => {
-          })
+          .then(res => {})
           .catch(err => {
             console.log(err)
           })
@@ -252,28 +242,9 @@
 
         saveAs(blob, "Voca.txt");
       },
-      //로컬스토리지에 저장한 데이터를 가져옴
-      getSavedDataOnLocalStorage: function () {
-        try {
-          let savedVocas = JSON.parse(localStorage.getItem('savedItems'))
-
-          if (!savedVocas) return
-
-          this.text = "";
-          savedVocas.forEach((item) => {
-            this.text += `${item.english}, ${item.korean}\n`
-          })
-        } catch (err) {
-          this.text = ""
-        }
-      },
-      //값을 전달하기전 로컬스토리지에 저장한다
-      saveDataOnLocalStorage: function () {
-        if (this.vocaHeader.length < 1) return;
-        localStorage.setItem('savedItems', JSON.stringify(this.vocaHeader.concat(this.voca)));
-      },
-      copy: function (remoteWords) {
-        this.text = remoteWords.voca
+      //clipborad에 저장
+      copy: function (words) {
+        // this.text = remoteWords.voca
       },
     }
   }
