@@ -1,15 +1,18 @@
 <template>
-  <b-card-group columns class="mt-5">
-    <b-card class="card text-center" v-for="(words, index) in localStorage.myWords" :key="index">
-      <pre>{{words | snippet}}</pre>
-    </b-card>
-  </b-card-group>
+  <div>
+    <b-card-group columns class="mt-5">
+      <b-card class="card text-center" v-for="(words, index) in localStorage.myWords" :key="index">
+        <pre>{{words | snippet}}</pre>
+      </b-card>
+    </b-card-group>
+  </div>
 </template>
 
 <script>
   export default {
     name: "Explanation",
     props: {
+      text: "",
       vocaProp: {
         type: Array,
         default: () => []
@@ -17,7 +20,7 @@
       vocaHeaderProp: {
         type: Array,
         default: () => []
-      }
+      },
     },
     watch: {},
     data() {
@@ -31,10 +34,18 @@
     created() {
       this.getSavedDataOnLocalStorage()
     },
+    mounted() {},
     destroyed() {
       this.saveDataOnLocalStorage()
     },
+    computed: {
+      //clipborad에 저장
+      copy: function (index) {
+        this.text = localStorage.myWords[index]
+      },
+    },
     methods: {
+
       //로컬스토리지에 저장한 데이터를 가져옴
       getSavedDataOnLocalStorage: function () {
         const keys = this.getKeysOnLocalStorage()
@@ -55,7 +66,7 @@
           this.localStorage.myWords.push(text)
         }
       },
-      //값을 전달하기전 로컬스토리지에 저장한다
+      //로컬스토리지에 저장한다
       saveDataOnLocalStorage: function () {
         if (this.vocaHeaderProp.length + this.vocaProp.length < 2) return
 

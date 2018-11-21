@@ -3,6 +3,11 @@
     <b-container class="px-0">
 
       <b-row>
+        <!-- 웹 한 줄 설명  -->
+        <b-col sm="6">
+          <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
+        </b-col>
+
         <!-- 버튼 그룹 -->
         <b-col sm="6">
           <b-button-group size="sm">
@@ -25,11 +30,6 @@
               <b-dropdown-item @click="buttonGroup.category.text='ETC'">ETC</b-dropdown-item>
             </b-dropdown>
           </b-button-group>
-        </b-col>
-
-        <!-- 웹 한 줄 설명  -->
-        <b-col sm="6">
-          <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
         </b-col>
       </b-row>
 
@@ -57,14 +57,18 @@
       </b-tooltip>
 
       <!-- 설명 칸 -->
-      <explanation class="mt-5"></explanation>
+      <!-- <explanation class="mt-5"></explanation> -->
 
       <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
       <category class="mt-5"></category>
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
       <my-words :vocaProp="voca" :vocaHeaderProp="vocaHeader"></my-words>
-      
+
+      <!-- Modal Component -->
+      <b-modal id="show-all-modal" title="전체보기">
+        <p class="my-4" v-cloak>{{text}}</p>
+      </b-modal>
     </b-container>
 
     <!-- 스낵바 -->
@@ -100,8 +104,8 @@
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
         vocaHeader: [],
-        //serverUrl: "https://vocatestsserver.herokuapp.com",
-        serverUrl: "http://localhost:5001",
+        serverUrl: "https://vocatestsserver.herokuapp.com",
+        //serverUrl: "http://localhost:5001",
         remoteVocas: [],
         images: {
           check: require('../assets/check.png'),
@@ -113,7 +117,7 @@
           category: {
             text: "ETC",
           },
-        },
+        }
       }
     },
     watch: {
@@ -203,10 +207,11 @@
       },
       //버튼클릭시 App.vue로 값을 보냄
       sendVocaToTable: function () {
-        let reformedText = this.reformText(this.text);
-        this.voca = this.formatTextToVoca(reformedText);
+        let reformedText = this.reformText(this.text)
+        this.voca = this.formatTextToVoca(reformedText)
 
-        this.postVocas(this.voca);
+        this.postVocas(this.voca)
+
         //router에서 table로 값을 전달함
         this.$router.push({
           name: 'Table',
@@ -235,10 +240,6 @@
         })
 
         saveAs(blob, "Voca.txt");
-      },
-      //clipborad에 저장
-      copy: function (words) {
-        // this.text = remoteWords.voca
       },
     }
   }

@@ -1,3 +1,4 @@
+import 'babel-polyfill' //for using async/await
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
@@ -27,7 +28,7 @@ const textWithDots = function(text, limit) {
   } 
 
   words = words.slice(0, limit)
-  
+
   let slicedText = ""
   for (let i = 0; i < limit; i++) {
     if (words[i] === undefined) {
@@ -44,7 +45,7 @@ const textWithDots = function(text, limit) {
   return slicedText
 }
 Vue.filter('snippet', function(text) {
-  const wordsLimit = 20
+  const wordsLimit = 19
 
   return textWithDots(text, wordsLimit)
 })

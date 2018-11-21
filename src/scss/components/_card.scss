@@ -1,6 +1,7 @@
 @import "../base/_colors";
 
 .card {
+  height: 30rem;
   &:hover {
     background-color: $hover-color;
   }

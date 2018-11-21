@@ -31,7 +31,8 @@
     watch: {},
     data() {
       return {
-        serverUrl: "http://localhost:5001",
+        serverUrl: "https://vocatestsserver.herokuapp.com",
+        // serverUrl: "http://localhost:5001",
         remoteWords: [],
         categories: ['TOEIC', 'TEPS', 'JPLT', 'ETC'],
         selectedCategory: "",
