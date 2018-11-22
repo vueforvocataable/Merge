@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-card-group columns class="mt-5">
+    <b-card-group columns>
       <b-card class="card text-center" v-for="(words, index) in localStorage" :key="index" @click="copyText(words.myWords)">
-        <pre>{{words.myWords}}</pre>
+        <pre>{{words.myWords | snippet}}</pre>
         <b-button-group>
           <b-form method="get" target="_blank" :action="serverUrl + '/api/voca/template/' + words.id">
             <!-- 쿼리 보내기위한 hidden input -->

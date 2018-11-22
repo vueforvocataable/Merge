@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="category-container">
 
-    <b-nav justified tabs>
+    <b-nav justified id="category-nav" class="mb-1" pills>
       <b-nav-item v-for="(category, i) in categories" :key="i" :active="selectedCategory === category" @click="selectedCategory=category"
         v-cloak>{{category}}</b-nav-item>
     </b-nav>
@@ -35,7 +35,7 @@
         // serverUrl: "http://localhost:5001",
         remoteWords: [],
         categories: ['TOEIC', 'TEPS', 'JPLT', 'ETC'],
-        selectedCategory: "",
+        selectedCategory: "ETC",
       }
     },
     created() {

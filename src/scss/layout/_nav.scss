@@ -1,24 +1,58 @@
 @import "../base/_colors";
+@import "../base/size";
 
-.nav {
-  background-color: $main-color;
-  box-shadow: 0px 1px $main-color;
+#main-navbar {
+  background-color: white;
+  font-size: $nav-font-size;
+  border-bottom: 1px solid $line-color;
   font-weight: bold;
+  height: 5rem;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+
+  a {
+    color: $text-color;
+
+    &:hover {
+      text-decoration: underline;
+      color: $main-color;
+    }
+
+    &:active {
+      color: $main-color;
+    }
+
+    &:focus {
+      color: $main-color;
+    }
+  }
 }
 
-a {
-  color: $nav-text-color;
+#category-nav {
+  border-top: 2px solid $main-color;
+  background-color: white;
+  font-size: $nav-font-size;
+  font-weight: bold;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 
-  &:hover {
-    color: $nav-text-color;
-    text-decoration: underline;
+  .active {
+    background-color: $main-color !important;
+    color: white !important;
   }
 
-  &:active {
-    color: $active-color;
-  }
+  a {
+    color: $text-color;
 
-  &:focus {
-    color: $active-color;
+    &:hover {
+      text-decoration: underline;
+      color: $text-color;
+    }
+
+    &:active {
+      color: $main-color;
+    }
+
+    &:focus {
+      color: $main-color;
+    }
   }
 }

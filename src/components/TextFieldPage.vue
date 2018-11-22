@@ -1,56 +1,60 @@
 <template>
   <div>
-    <b-container class="px-0">
+    <b-container id="text-field-page-container" class="px-0">
       <!-- progress bar -->
       <b-row>
         <div class="text-xs-center" v-if="showProgressGircular">
           <v-progress-circular indeterminate></v-progress-circular>
         </div>
       </b-row>
-      <b-row>
-        <!-- 웹 한 줄 설명  -->
-        <b-col sm="6">
-          <b-alert show variant="primary">빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</b-alert>
-        </b-col>
 
-        <!-- 버튼 그룹 -->
-        <b-col sm="6">
-          <b-button-group size="sm">
-            <b-button v-on:click="downloadVoca()">
-              <b-img width="35" height="35" :src="images.memo" alt="btn image" />
-              <span class="btn-font-size">메모장으로 저장</span>
-            </b-button>
-            <b-button :state="!validateText.validation" :disabled="!validateText.validation" @click="sendVocaToTable()">
-              <b-img width="35" height="35" :src="validateText.img" alt="btn image" />
-              <span class="btn-font-size">단어시험지 만들기</span>
-            </b-button>
-            <b-dropdown left text="카테고리">
-              <b-dropdown-header>영어</b-dropdown-header>
-              <b-dropdown-item @click="buttonGroup.category.text='TOEIC'">TOEIC</b-dropdown-item>
-              <b-dropdown-item @click="buttonGroup.category.text='TEPS'">TEPS</b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-header>일본어</b-dropdown-header>
-              <b-dropdown-item @click="buttonGroup.category.text='JPLT'">JPLT</b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="buttonGroup.category.text='ETC'">ETC</b-dropdown-item>
-            </b-dropdown>
-          </b-button-group>
-        </b-col>
+      <!-- Stepper -->
+      <div v-if="stepper.isFirstVisit">
+        <b-row id="stepper-container" class="mx-auto">
+          <stepper></stepper>
+        </b-row>
+        <!-- TODO 리펙토링 할 것 -->
+        <!-- <b-row class="mt-5" /> -->
+      </div>
+
+      <!-- 버튼 그룹 -->
+      <b-row class="mx-auto">
+        <b-button-group size="sm">
+          <b-button v-on:click="downloadVoca()">
+            <b-img width="35" height="35" :src="images.memo" alt="btn image" />
+            <span class="btn-font-size">메모장으로 저장</span>
+          </b-button>
+          <b-button :state="!validateText.validation" :disabled="!validateText.validation" @click="sendVocaToTable()">
+            <b-img width="35" height="35" :src="validateText.img" alt="btn image" />
+            <span class="btn-font-size">단어시험지 만들기</span>
+          </b-button>
+        </b-button-group>
       </b-row>
 
       <!-- 텍스트에어리아 -->
-      <b-row class="mt-2">
-        <b-col sm="6">
-          <div id="preview-label" v-cloak>{{buttonGroup.category.text}}</div>
-          <b-form-textarea placeholder="영어단어, 한글
+      <b-row class="mt-2" id="t-p-c-container">
+
+        <b-col class="col1" cols="2">
+          <b-list-group>
+            <b-list-group-item disabled>카테고리</b-list-group-item>
+            <b-list-group-item button @click="buttonGroup.category.text='TOEIC'; activeCategoryButton(0)" :active="buttonGroup.category.active[0]">TOEIC</b-list-group-item>
+            <b-list-group-item button @click="buttonGroup.category.text='TEPS'; activeCategoryButton(1)" :active="buttonGroup.category.active[1]">TEPS</b-list-group-item>
+            <b-list-group-item disabled>일본어</b-list-group-item>
+            <b-list-group-item button @click="buttonGroup.category.text='JPLT'; activeCategoryButton(2)" :active="buttonGroup.category.active[2]">JPLT</b-list-group-item>
+            <b-list-group-item button @click="buttonGroup.category.text='ETC'; activeCategoryButton(3)" :active="buttonGroup.category.active[3]">기타</b-list-group-item>
+          </b-list-group>
+        </b-col>
+
+        <b-col class="col2" cols="4">
+          <b-form-textarea placeholder="영어, 한글
   Simple, 간단한
   Voca, 단어
-  Test paper, 시험지 " title="사용법" autofocus
-            class="textfield" id="inputField" no-resize v-model="text" />
+  Test paper, 시험지 " title="사용법" autofocus class="textfield"
+            id="inputField" no-resize v-model="text" />
         </b-col>
 
         <!-- 프리뷰 -->
-        <b-col sm="6" class="preview-container">
+        <b-col cols="6" class="col3 preview-container">
           <div id="preview-label">미리보기</div>
           <preview id="preview" :vocaProp="voca" :vocaHeaderProp="vocaHeader"></preview>
         </b-col>
@@ -61,19 +65,16 @@
         <span>각 단어 사이는 <strong>,</strong> 로 구분합니다.</span>
       </b-tooltip>
 
-      <!-- 설명 칸 -->
-      <!-- <explanation class="mt-5"></explanation> -->
-
       <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
       <category class="mt-5" v-on:copyText="copyText"></category>
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
-      <my-words :vocaProp="voca" :vocaHeaderProp="vocaHeader" :myWords="myWords" v-on:copyText="copyText"></my-words>
-
-      <!-- Modal Component -->
-      <b-modal id="show-all-modal" title="전체보기">
-        <p class="my-4" v-cloak>{{text}}</p>
-      </b-modal>
+      <div id="my-words-container">
+        <div class="mt-5" id="my-words-label">
+          <span>내가 사용한 단어</span>
+        </div>
+        <my-words class="mt-1" :vocaProp="voca" :vocaHeaderProp="vocaHeader" :myWords="myWords" v-on:copyText="copyText"></my-words>
+      </div>
     </b-container>
 
     <!-- 스낵바 -->
@@ -85,8 +86,8 @@
   import Preview from './Preview.vue'
   import category from './category.vue'
   import Snackbar from './Snackbar.vue'
-  import Explanation from './Explanation.vue'
   import MyWords from './MyWords.vue'
+  import Stepper from './Stepper.vue'
   import {
     saveAs
   } from '@elastic/filesaver'
@@ -99,7 +100,7 @@
       'preview': Preview,
       'category': category,
       'snackbar': Snackbar,
-      'explanation': Explanation,
+      'stepper': Stepper,
     },
     data() {
       return {
@@ -121,9 +122,13 @@
         buttonGroup: {
           category: {
             text: "ETC",
+            active: [false, false, false, true],
           },
         },
-        myWords: []
+        myWords: [],
+        stepper: {
+          isFirstVisit: false,
+        },
       }
     },
     watch: {
@@ -156,7 +161,33 @@
         }
       },
     },
+    created() {
+      this.checkVisited()
+    },
     methods: {
+      checkVisited: function () {
+        let isFirstVisit = false
+        try {
+          isFirstVisit = localStorage.getItem("isFirstVisit")
+        } catch (err) {
+          console.log(err)
+          isFirstVisit = true
+        }
+  
+        if (isFirstVisit == null || isFirstVisit == true) {
+          //방문했음으로 방문처리
+          this.stepper.isFirstVisit = true
+          localStorage.setItem("isFirstVisit", false)
+        } else {
+          this.stepper.isFirstVisit = false
+        }
+      },
+      activeCategoryButton: function (index) {
+        for (let i = 0; i < this.buttonGroup.category.active.length; i++) {
+          this.buttonGroup.category.active[i] = false
+        }
+        this.buttonGroup.category.active.splice(index, 1, true)
+      },
       copyText: function (text) {
         this.text = text
       },

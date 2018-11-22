@@ -1,0 +1,4 @@
+#stepper-container {
+  height: 35rem; }
+  #stepper-container .v-stepper__step__step {
+    background: #c03444 !important; }

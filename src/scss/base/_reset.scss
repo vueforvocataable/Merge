@@ -1,4 +1,11 @@
+@import "../base/_colors";
+
 html {
-    font-size: 14px;
+    font-size: 13px;
+    position: relative;
 }
 
+.form-control:focus {
+    border-color: white !important;
+    box-shadow: 0 0 10px $main-color-shadow !important;
+}

@@ -1,0 +1,54 @@
+@import "../base/_colors";
+
+#text-field-page-container {
+  // ...
+}
+
+#category-container {
+  background-color: $line-color;
+  height: 64.2rem;
+}
+
+#t-p-c-container {
+  .col1 {
+    padding-right: 0px !important;
+  }
+
+  .col2 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}
+
+#my-words-container {
+  background-color: $line-color;
+  height: 95.2rem;
+}
+
+#stepper-container {
+
+  .v-stepper__wrapper {
+
+    .theme--light.v-card {
+      background-color: $line-color !important;
+    }
+  }
+
+  .v-stepper__step--complete {
+    .v-stepper__step__step {
+      background: white !important;
+    }
+  }
+
+  .v-stepper__step--active {
+    .v-stepper__step__step {
+      background: white !important;
+    }
+  }
+
+  .v-stepper__step--inactive {
+    .v-stepper__step__step {
+      background: $main-color !important;
+    }
+  }
+}

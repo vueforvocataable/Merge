@@ -1,18 +1,40 @@
-.nav {
-  background-color: #c03444;
-  -webkit-box-shadow: 0px 1px #c03444;
-  box-shadow: 0px 1px #c03444;
-  font-weight: bold; }
+#main-navbar {
+  background-color: white;
+  font-size: 1.2rem;
+  border-bottom: 1px solid gainsboro;
+  font-weight: bold;
+  height: 5rem;
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+  #main-navbar a {
+    color: darkslategray; }
+    #main-navbar a:hover {
+      text-decoration: underline;
+      color: #c03444; }
+    #main-navbar a:active {
+      color: #c03444; }
+    #main-navbar a:focus {
+      color: #c03444; }
 
-a {
-  color: #f88585; }
-  a:hover {
-    color: #f88585;
-    text-decoration: underline; }
-  a:active {
-    color: white; }
-  a:focus {
-    color: white; }
+#category-nav {
+  border-top: 2px solid #c03444;
+  background-color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+  #category-nav .active {
+    background-color: #c03444 !important;
+    color: white !important; }
+  #category-nav a {
+    color: darkslategray; }
+    #category-nav a:hover {
+      text-decoration: underline;
+      color: darkslategray; }
+    #category-nav a:active {
+      color: #c03444; }
+    #category-nav a:focus {
+      color: #c03444; }
 
 .footer {
   background-color: white !important; }
@@ -30,6 +52,33 @@ a {
     margin-top: 10mm; }
   .table td {
     background-color: transparent !important; } }
+
+#category-container {
+  background-color: gainsboro;
+  height: 64.2rem; }
+
+#t-p-c-container .col1 {
+  padding-right: 0px !important; }
+
+#t-p-c-container .col2 {
+  padding-left: 0px !important;
+  padding-right: 0px !important; }
+
+#my-words-container {
+  background-color: gainsboro;
+  height: 95.2rem; }
+
+#stepper-container .v-stepper__wrapper .theme--light.v-card {
+  background-color: gainsboro !important; }
+
+#stepper-container .v-stepper__step--complete .v-stepper__step__step {
+  background: white !important; }
+
+#stepper-container .v-stepper__step--active .v-stepper__step__step {
+  background: white !important; }
+
+#stepper-container .v-stepper__step--inactive .v-stepper__step__step {
+  background: #c03444 !important; }
 
 .btn {
   background-color: white;
@@ -51,37 +100,82 @@ a {
     -webkit-box-shadow: 5px 5px #f88585;
     box-shadow: 5px 5px #f88585; }
 
+button:focus {
+  outline: none; }
+
+.btn-group {
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+
+.list-group {
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+
 .btn-font-size {
   font-size: 0.9rem;
   font-weight: bold; }
 
+#t-p-c-container .active {
+  border-color: gainsboro !important;
+  background-color: #c03444; }
+
 .textfield {
-  border-color: #c03444;
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   text-align: center;
   height: 31rem;
   max-height: 31rem;
-  border: 4px solid #c03444;
   width: 100%;
   margin: 0px !important;
   padding: 0px !important;
+  font-weight: bold;
+  border: 1px solid gainsboro; }
+  .textfield::-webkit-input-placeholder {
+    color: gainsboro;
+    font-weight: none; }
+  .textfield:-ms-input-placeholder {
+    color: gainsboro;
+    font-weight: none; }
+  .textfield::-ms-input-placeholder {
+    color: gainsboro;
+    font-weight: none; }
+  .textfield::placeholder {
+    color: gainsboro;
+    font-weight: none; }
+
+#my-words-label {
+  border-top: 2px solid #c03444;
+  color: #c03444;
+  font-size: 1.2rem;
+  text-align: center;
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  height: 3rem;
+  line-height: 3rem;
+  background-color: white;
+  font-size: 1.2rem;
   font-weight: bold; }
-  .textfield:focus {
-    border-color: #c03444;
-    -webkit-box-shadow: 7px 7px #c03444;
-    box-shadow: 7px 7px #c03444; }
 
 input[type="checkbox"]:checked + label:before {
   background-color: #c03444 !important; }
 
 .preview-container #preview {
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   text-align: center;
   max-height: 31rem;
   overflow: auto;
-  border: 4px solid #c03444;
+  border: 1px solid gainsboro;
   border-radius: 5px; }
 
+.preview-container .indexWidth {
+  width: 10%;
+  text-align: center; }
+
 .card {
-  height: 30rem; }
+  height: 30rem;
+  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
   .card:hover {
     background-color: #f0f0f0; }
   .card:active {
@@ -89,7 +183,13 @@ input[type="checkbox"]:checked + label:before {
     border-color: #c03444; }
 
 html {
-  font-size: 14px; }
+  font-size: 13px;
+  position: relative; }
+
+.form-control:focus {
+  border-color: white !important;
+  -webkit-box-shadow: 0 0 10px rgba(192, 52, 68, 0.6) !important;
+  box-shadow: 0 0 10px rgba(192, 52, 68, 0.6) !important; }
 
 #preview-label {
   position: absolute;
