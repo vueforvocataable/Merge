@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-container class="px-0">
+      <!-- progress bar -->
       <b-row>
         <div class="text-xs-center" v-if="showProgressGircular">
           <v-progress-circular indeterminate></v-progress-circular>
