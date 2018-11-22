@@ -20,7 +20,7 @@
           <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
         </b-form-group>
       </div>
-
+    </b-container>
 
       <div class="table-container">
         <div v-for="(items, index) in countTable" :key="index">
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-    </b-container>
+    
     <upLoadModal @show-Img="showImg2"></upLoadModal>
   </div>
 
@@ -79,12 +79,12 @@
           {
             "class": "vocaWidth",
             key: "english",
-            label: this.tableHeaderProp[0].english
+            label:  this.tableHeaderProp[0] ? this.tableHeaderProp[0].english : ""
           },
           {
             "class": "vocaWidth",
             key: "korean",
-            label: this.tableHeaderProp[0].korean
+            label: this.tableHeaderProp[0] ? this.tableHeaderProp[0].korean : ""
           }
         ],
         striped: false,
@@ -98,6 +98,7 @@
         isSuffle: false,
         showModal: false,
         image: "",
+        tempVoca: [],
       }
     },
     watch: {

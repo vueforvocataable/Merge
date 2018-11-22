@@ -140,6 +140,12 @@
     computed: {
       validateText: function () {
         const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
+        if (this.text.length == 0) {
+          return {
+            validation: false,
+            img: this.images.uncheck
+          }
+        }
         const vocas = this.text.split("\n")
 
         for (let i = 0; i < vocas.length; i++) {
