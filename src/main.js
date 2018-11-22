@@ -8,11 +8,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify'
-import '@fortawesome/fontawesome-free/css/all.css'
 
-Vue.use(Vuetify, {
-  iconfont: 'fa'
- })
+Vue.use(Vuetify)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter) 
 const router = new VueRouter({
