@@ -14,6 +14,9 @@
             <b-nav-item>
               <router-link to="/table" replace>단어시험지</router-link>
             </b-nav-item>
+            <b-nav-item>
+              <router-link to="/help" replace>HELP!</router-link>
+            </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
