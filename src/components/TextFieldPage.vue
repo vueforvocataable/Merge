@@ -1,7 +1,11 @@
 <template>
   <div>
     <b-container class="px-0">
-
+      <b-row>
+        <div class="text-xs-center" v-if="showProgressGircular">
+          <v-progress-circular indeterminate></v-progress-circular>
+        </div>
+      </b-row>
       <b-row>
         <!-- 웹 한 줄 설명  -->
         <b-col sm="6">
@@ -73,7 +77,6 @@
 
     <!-- 스낵바 -->
     <snackbar></snackbar>
-
   </div>
 </template>
 
@@ -99,6 +102,7 @@
     },
     data() {
       return {
+        showProgressGircular: false,
         //텍스트 에이리어에 있는 텍스트를 담는 변수
         text: "",
         //텍스트를 리폼한 단어를 담는 변수
@@ -164,6 +168,8 @@
         voca.forEach((x, index) => {
           text += `${voca[index].english}, ${voca[index].korean}\n`
         })
+
+        this.showProgressGircular = true
 
         return axios.post(this.serverUrl + router, {
           voca: text,
