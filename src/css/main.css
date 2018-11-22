@@ -48,10 +48,27 @@
 
 @media print {
   .a4 {
-    page-break-after: always;
-    margin-top: 10mm; }
+    page-break-after: auto; }
   .table td {
     background-color: transparent !important; } }
+
+.repeatTable {
+  position: relative; }
+
+.backgroundImg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  opacity: 0.2; }
 
 #category-container {
   background-color: gainsboro;

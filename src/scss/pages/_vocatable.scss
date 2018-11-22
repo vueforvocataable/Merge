@@ -1,10 +1,23 @@
 @media print {
   .a4 {
-    page-break-after: always;
-    margin-top: 10mm
+    page-break-after: auto;
   }
 
   .table td {
     background-color: transparent !important;
   }
+}
+
+.repeatTable {
+  position: relative;
+}
+
+.backgroundImg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.2;
 }
