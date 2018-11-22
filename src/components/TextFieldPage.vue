@@ -60,10 +60,10 @@
       <!-- <explanation class="mt-5"></explanation> -->
 
       <!-- 다른 사용자가 사용한 단어를 카테고리로 정렬 후 불러옴 -->
-      <category class="mt-5"></category>
+      <category class="mt-5" v-on:copyText="copyText"></category>
 
       <!-- 사용자가 사용한 단어를 불러옴 -->
-      <my-words :vocaProp="voca" :vocaHeaderProp="vocaHeader"></my-words>
+      <my-words :vocaProp="voca" :vocaHeaderProp="vocaHeader" :myWords="myWords" v-on:copyText="copyText"></my-words>
 
       <!-- Modal Component -->
       <b-modal id="show-all-modal" title="전체보기">
@@ -117,7 +117,8 @@
           category: {
             text: "ETC",
           },
-        }
+        },
+        myWords: []
       }
     },
     watch: {
@@ -144,7 +145,6 @@
             }
           }
         }
-
         return {
           validation: true,
           img: this.images.check
@@ -152,6 +152,9 @@
       },
     },
     methods: {
+      copyText: function (text) {
+        this.text = text
+      },
       postVocas: function (voca) {
         if (!voca || voca.length < 1) return
         let router = "/api/voca"
@@ -162,14 +165,20 @@
           text += `${voca[index].english}, ${voca[index].korean}\n`
         })
 
-        axios.post(this.serverUrl + router, {
-            voca: text,
-            category: this.buttonGroup.category.text
+        return axios.post(this.serverUrl + router, {
+          voca: text,
+          category: this.buttonGroup.category.text
+        }).then(res => {
+          this.myWords.push({
+            voca: this.voca,
+            vocaHeader: this.vocaHeader,
+            category: res.data.savedVoca.category,
+            date: res.data.savedVoca.date,
+            id: res.data.savedVoca._id
           })
-          .then(res => {})
-          .catch(err => {
-            console.log(err)
-          })
+        }).catch(err => {
+          console.log(err)
+        })
       },
       //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
       reformText: function (text) {
@@ -206,11 +215,12 @@
         return vocaObj;
       },
       //버튼클릭시 App.vue로 값을 보냄
-      sendVocaToTable: function () {
+      sendVocaToTable: async function () {
         let reformedText = this.reformText(this.text)
         this.voca = this.formatTextToVoca(reformedText)
 
-        this.postVocas(this.voca)
+        await this.postVocas(this.voca)
+        //TODO 로딩창 넣기
 
         //router에서 table로 값을 전달함
         this.$router.push({
@@ -219,7 +229,7 @@
             vocaProp: this.voca,
             tableHeaderProp: this.vocaHeader
           }
-        });
+        })
       },
       //파일 저장 버튼 누르면 실행
       //텍스트 필드의 텍스트를 파일로 저장함

@@ -1,8 +1,15 @@
 <template>
   <div>
     <b-card-group columns class="mt-5">
-      <b-card class="card text-center" v-for="(words, index) in localStorage.myWords" :key="index">
-        <pre>{{words | snippet}}</pre>
+      <b-card class="card text-center" v-for="(words, index) in localStorage" :key="index" @click="copyText(words.myWords)">
+        <pre>{{words.myWords}}</pre>
+        <b-button-group>
+          <b-form method="get" target="_blank" :action="serverUrl + '/api/voca/template/' + words.id">
+            <!-- 쿼리 보내기위한 hidden input -->
+            <input type="hidden" name="category" :value="words.category" />
+            <input type="submit" value="전체보기" />
+          </b-form>
+        </b-button-group>
       </b-card>
     </b-card-group>
   </div>
@@ -12,40 +19,32 @@
   export default {
     name: "Explanation",
     props: {
-      text: "",
-      vocaProp: {
+      myWords: {
         type: Array,
-        default: () => []
-      },
-      vocaHeaderProp: {
-        type: Array,
-        default: () => []
+        default: () => {
+          []
+        }
       },
     },
     watch: {},
     data() {
       return {
-        localStorage: {
-          texts: [],
-          myWords: []
-        },
+        serverUrl: "https://vocatestsserver.herokuapp.com",
+        // serverUrl: "http://localhost:5001",
+        localStorage: [],
       }
     },
     created() {
       this.getSavedDataOnLocalStorage()
     },
-    mounted() {},
     destroyed() {
       this.saveDataOnLocalStorage()
     },
-    computed: {
-      //clipborad에 저장
-      copy: function (index) {
-        this.text = localStorage.myWords[index]
-      },
-    },
+    computed: {},
     methods: {
-
+      copyText: function (text) {
+        this.$emit('copyText', text)
+      },
       //로컬스토리지에 저장한 데이터를 가져옴
       getSavedDataOnLocalStorage: function () {
         const keys = this.getKeysOnLocalStorage()
@@ -53,24 +52,32 @@
         for (let i in keys.reverse()) { //최신날짜 순으로 
           let text = ""
           let words = ""
-
+          let item = ""
           try {
-            words = JSON.parse(localStorage.getItem(keys[i]))
+            item = JSON.parse(localStorage.getItem(keys[i]))
           } catch (err) {
             console.log(err)
           }
+          words = item.vocaHeader.concat(item.voca)
 
           words.forEach((word, index) => {
             text += `${word.english}, ${word.korean}\n`
           })
-          this.localStorage.myWords.push(text)
+
+          this.localStorage.push({
+            category: item.category,
+            date: item.date,
+            id: item.id,
+            myWords: text
+          })
         }
       },
       //로컬스토리지에 저장한다
       saveDataOnLocalStorage: function () {
-        if (this.vocaHeaderProp.length + this.vocaProp.length < 2) return
+        let words = this.myWords[0]
+        if (words.vocaHeader.length + words.voca.length < 2) return
 
-        localStorage.setItem(Date.now(), JSON.stringify(this.vocaHeaderProp.concat(this.vocaProp)))
+        localStorage.setItem(Date.now(), JSON.stringify(words))
         this.deleteOldDataOnLocalStorage()
       },
       //최신단어 limit 개만 남김

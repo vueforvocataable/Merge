@@ -7,7 +7,7 @@
     </b-nav>
 
     <b-card-group columns>
-      <b-card class="card text-center" v-for="(words, i) in remoteWords" :key="i">
+      <b-card class="card text-center" v-for="(words, i) in remoteWords" :key="i" @click="copyText(words.voca)">
         <pre>{{words.voca | snippet}}</pre>
         <b-button-group>
           <b-form method="get" target="_blank" :action="serverUrl + '/api/voca/template/' + words._id" >
@@ -49,6 +49,9 @@
       },
     },
     methods: {
+      copyText: function (text) {
+        this.$emit('copyText', text)
+      },
       //서버로 부터 텍스트 받음
       getWordsFromGivenCategory: function (category) {
         let query = "?category=" + category
