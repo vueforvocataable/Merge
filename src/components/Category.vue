@@ -31,8 +31,8 @@
     watch: {},
     data() {
       return {
-        serverUrl: "https://vocatestsserver.herokuapp.com",
-        // serverUrl: "http://localhost:5001",
+        // serverUrl: "https://vocatestsserver.herokuapp.com",
+        serverUrl: "http://localhost:5001",
         remoteWords: [],
         categories: ['TOEIC', 'TEPS', 'JPLT', 'ETC'],
         selectedCategory: "ETC",
@@ -40,7 +40,7 @@
     },
     created() {
       //Set default category to TOEIC
-      this.getWordsFromGivenCategory('TOEIC')
+      this.getWordsFromGivenCategory('ETC')
     },
     mounted() {},
     watch: {

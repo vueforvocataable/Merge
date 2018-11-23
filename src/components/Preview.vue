@@ -38,7 +38,20 @@
         this.init()
       },
       vocaHeaderProp: function (header) {
-        if (!header[0]) return
+        if (!header[0]) {
+          this.fields.splice(1, 1, {
+            "class": "vocaWidth",
+            key: "english",
+            label: ""
+          })
+          this.fields.splice(2, 1, {
+            "class": "vocaWidth",
+            key: "korean",
+            label: ""
+          })
+          
+          return
+        }
 
         this.fields.splice(1, 1, {
           "class": "vocaWidth",
@@ -93,7 +106,7 @@
       fillTableContent: function () {
         if (!this.vocaProp) this.vocas = ""
         this.vocas = this.vocaProp
-        
+
         for (let i = 0; i < this.vocas.length; i++) {
           this.createTable.splice(i, 1, this.vocas[i])
         }

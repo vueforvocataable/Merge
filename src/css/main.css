@@ -73,6 +73,8 @@
 #category-container {
   background-color: gainsboro;
   height: 64.2rem; }
+  #category-container .nav-link.active {
+    border-radius: 0; }
 
 #t-p-c-container .col1 {
   padding-right: 0px !important; }
@@ -85,14 +87,34 @@
   background-color: gainsboro;
   height: 95.2rem; }
 
+#stepper-container .v-icon {
+  display: none; }
+
+#stepper-container .btn-cancel {
+  background-color: gainsboro; }
+
+#stepper-container .btn-keep-going {
+  background-color: #c03444; }
+
+#stepper-container .v-stepper {
+  background-color: gainsboro; }
+
 #stepper-container .v-stepper__wrapper .theme--light.v-card {
   background-color: gainsboro !important; }
 
 #stepper-container .v-stepper__step--complete .v-stepper__step__step {
-  background: white !important; }
+  background: white !important;
+  display: none !important; }
+
+#stepper-container .v-stepper__step--active .v-stepper__label {
+  display: inline-block !important; }
 
 #stepper-container .v-stepper__step--active .v-stepper__step__step {
-  background: white !important; }
+  background: white !important;
+  display: none !important; }
+
+#stepper-container .v-stepper__step--inactive .v-stepper__label {
+  display: inline-block !important; }
 
 #stepper-container .v-stepper__step--inactive .v-stepper__step__step {
   background: #c03444 !important; }
@@ -196,15 +218,19 @@ input[type="checkbox"]:checked + label:before {
   width: 100%;
   height: 100%; }
 
-.card {
-  height: 30rem;
-  -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
-  .card:hover {
-    background-color: #f0f0f0; }
-  .card:active {
-    background-color: white;
-    border-color: #c03444; }
+.card-columns {
+  -webkit-column-gap: 0.3rem !important;
+  column-gap: 0.3rem !important; }
+  .card-columns .card {
+    margin-bottom: 0.3rem;
+    height: 30rem;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+    .card-columns .card:hover {
+      background-color: #f0f0f0; }
+    .card-columns .card:active {
+      background-color: white;
+      border-color: #c03444; }
 
 html {
   font-size: 13px;

@@ -29,8 +29,8 @@
     watch: {},
     data() {
       return {
-        serverUrl: "https://vocatestsserver.herokuapp.com",
-        // serverUrl: "http://localhost:5001",
+        // serverUrl: "https://vocatestsserver.herokuapp.com",
+        serverUrl: "http://localhost:5001",
         localStorage: [],
       }
     },
@@ -58,6 +58,9 @@
           } catch (err) {
             console.log(err)
           }
+
+          if (item == null) return
+
           words = item.vocaHeader.concat(item.voca)
 
           words.forEach((word, index) => {

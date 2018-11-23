@@ -1,5 +1,4 @@
-<!-- TODO: 리펙토링! mb-5 없애기 -->
-<template class="mb-5">
+<template>
   <v-stepper v-model="e1" class="mx-auto" style="width:100%;" v-if="!isCancel">
     <v-stepper-header>
       <v-stepper-step :complete="e1 > 1" step="1">단어 입력하기</v-stepper-step>
@@ -20,11 +19,11 @@
           <v-img :src="images.step1"></v-img>
         </v-card>
 
-        <v-btn @click="e1 = 2">
+        <v-btn class="btn-keep-going" @click="e1 = 2">
           계속하기
         </v-btn>
 
-        <v-btn flat @click="isCancel = true">닫기</v-btn>
+        <v-btn class="btn-cancel" flat @click="isCancel = true">닫기</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
@@ -32,21 +31,21 @@
           <v-img :src="images.step2"></v-img>
         </v-card>
 
-        <v-btn @click="e1 = 3">
+        <v-btn class="btn-keep-going" @click="e1 = 3">
           계속하기
         </v-btn>
 
-        <v-btn flat @click="isCancel = true">닫기</v-btn>
+        <v-btn class="btn-cancel" flat @click="isCancel = true">닫기</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
         <v-card class="mb-5" height="200px"></v-card>
 
-        <v-btn @click="e1 = 1">
+        <v-btn class="btn-keep-going" @click="e1 = 1">
           계속하기
         </v-btn>
 
-        <v-btn flat @click="isCancel = true">닫기</v-btn>
+        <v-btn class="btn-cancel" flat @click="isCancel = true">닫기</v-btn>
       </v-stepper-content>
 
     </v-stepper-items>

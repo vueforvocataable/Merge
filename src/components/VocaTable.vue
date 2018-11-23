@@ -59,23 +59,6 @@
           this.shuffle()
         }
       },
-      vocaProp: function () {
-        this.init()
-      },
-      tableHeaderProp: function (header) {
-        if (header.length < 1) return;
-
-        this.fields.splice(1, 1, {
-          "class": "vocaWidth",
-          key: "english",
-          label: header[0].english
-        })
-        this.fields.splice(2, 1, {
-          "class": "vocaWidth",
-          key: "korean",
-          label: header[0].korean
-        })
-      },
     },
     data() {
       return {

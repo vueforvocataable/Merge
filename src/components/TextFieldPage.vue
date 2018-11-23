@@ -9,13 +9,9 @@
       </b-row>
 
       <!-- Stepper -->
-      <div v-if="stepper.isFirstVisit">
-        <b-row id="stepper-container" class="mx-auto">
+        <b-row v-if="stepper.isFirstVisit" id="stepper-container" class="mx-auto mb-5">
           <stepper></stepper>
         </b-row>
-        <!-- TODO 리펙토링 할 것 -->
-        <!-- <b-row class="mt-5" /> -->
-      </div>
 
       <!-- 버튼 그룹 -->
       <b-row class="mx-auto">
@@ -110,8 +106,8 @@
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
         vocaHeader: [],
-        serverUrl: "https://vocatestsserver.herokuapp.com",
-        //serverUrl: "http://localhost:5001",
+        // serverUrl: "https://vocatestsserver.herokuapp.com",
+        serverUrl: "http://localhost:5001",
         remoteVocas: [],
         images: {
           check: require('../assets/check.png'),
@@ -253,7 +249,6 @@
             });
           }
         });
-
         this.vocaHeader = vocaObj.splice(0, 1);
 
         return vocaObj;
@@ -285,7 +280,7 @@
         const noNewlineTexts = text.split(newlineRegexp)
 
         let temp = ""
-        noNewlineTexts.forEach(str => {
+        noNewlineTexts.forEach((str, index) => { 
           temp += (str += "\r\n") //각 배열에 newline을 추가해줌
         })
 

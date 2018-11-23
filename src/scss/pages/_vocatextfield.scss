@@ -7,6 +7,9 @@
 #category-container {
   background-color: $line-color;
   height: 64.2rem;
+  .nav-link.active {
+      border-radius: 0;
+  }
 }
 
 #t-p-c-container {
@@ -27,8 +30,23 @@
 
 #stepper-container {
 
-  .v-stepper__wrapper {
+  .v-icon {
+    display: none;
+  }
 
+  .btn-cancel {
+    background-color: $line-color;
+  }
+
+  .btn-keep-going {
+    background-color: $main-color;
+  }
+
+  .v-stepper {
+    background-color: $line-color;
+  }
+
+  .v-stepper__wrapper {
     .theme--light.v-card {
       background-color: $line-color !important;
     }
@@ -37,16 +55,27 @@
   .v-stepper__step--complete {
     .v-stepper__step__step {
       background: white !important;
+      display: none !important;
     }
   }
 
   .v-stepper__step--active {
+    .v-stepper__label {
+      display: inline-block !important;
+    }
+
     .v-stepper__step__step {
       background: white !important;
+      display: none !important;
+
     }
   }
 
   .v-stepper__step--inactive {
+    .v-stepper__label {
+      display: inline-block !important;
+    }
+
     .v-stepper__step__step {
       background: $main-color !important;
     }
