@@ -106,8 +106,8 @@
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
         vocaHeader: [],
-        // serverUrl: "https://vocatestsserver.herokuapp.com",
-        serverUrl: "http://localhost:5001",
+        serverUrl: "https://vocatestsserver.herokuapp.com",
+        // serverUrl: "http://localhost:5001",
         remoteVocas: [],
         images: {
           check: require('../assets/check.png'),

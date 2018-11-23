@@ -39,7 +39,9 @@
       </v-stepper-content>
 
       <v-stepper-content step="3">
-        <v-card class="mb-5" height="200px"></v-card>
+        <v-card class="mb-5" height="200px">
+            <v-img :src="images.step3"></v-img>
+        </v-card>
 
         <v-btn class="btn-keep-going" @click="e1 = 1">
           계속하기
@@ -64,6 +66,7 @@
         images: {
           step1: require('../assets/step1.png'),
           step2: require('../assets/step2.png'),
+          step3: require('../assets/step3.png'),
         },
       }
     },

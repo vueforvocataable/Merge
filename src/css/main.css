@@ -48,7 +48,7 @@
 
 @media print {
   .a4 {
-    page-break-after: auto; }
+    page-break-after: always; }
   .table td {
     background-color: transparent !important; } }
 
