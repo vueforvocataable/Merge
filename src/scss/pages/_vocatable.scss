@@ -8,6 +8,14 @@
   }
 }
 
+@page {
+  margin-top: 30mm;
+}
+
+@page:first {
+  margin-top: 20mm;
+}
+
 .repeatTable {
   position: relative;
 }

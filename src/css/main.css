@@ -52,6 +52,12 @@
   .table td {
     background-color: transparent !important; } }
 
+@page {
+  margin-top: 30mm; }
+
+@page :first {
+  margin-top: 20mm; }
+
 .repeatTable {
   position: relative; }
 
