@@ -43,7 +43,7 @@
     components: {},
     data: function () {
       return {
-        logo: require('./assets/logo.svg')
+        logo: require('./assets/logo.svg'),
       }
     }
   };

@@ -4,14 +4,23 @@
 .btn {
   background-color: white;
   border-color: #DBDBDB;
-  color: #c03546;
+  color: $text-color;
   font-weight: bold;
   font-size: 0.9rem;
+
+  .img-color {
+    width: 2.3rem;
+    height: 2.3rem;
+    filter: invert(26%) sepia(36%) saturate(2827%) hue-rotate(324deg) brightness(101%) contrast(93%);
+  }
 
   &:hover {
     background-color: $main-color;
     border-color: $main-color;
     color: white;
+    .img-color {
+      filter: invert(99%) sepia(3%) saturate(910%) hue-rotate(227deg) brightness(119%) contrast(100%);
+    }
   }
 
   &:focus {

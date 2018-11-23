@@ -135,13 +135,13 @@
         return this.image
       },
       addTable: function () {
-        for (let tablePushNum = 0; tablePushNum < this.vocaProp.length / 50; tablePushNum++) {
+        for (let tablePushNum = 0; tablePushNum < this.vocaProp.length / 60; tablePushNum++) {
           this.countTable.push("vocaTable")
         }
       },
       cutVoca: function (cut) {
         let slicedVoca
-        slicedVoca = this.vocaProp.slice(50 * cut, 50 + 50 * cut)
+        slicedVoca = this.vocaProp.slice(60 * cut, 60 + 60 * cut)
         return slicedVoca
       },
     },

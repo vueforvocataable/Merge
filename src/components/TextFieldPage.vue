@@ -2,10 +2,8 @@
   <div>
     <b-container id="text-field-page-container" class="px-0">
       <!-- progress bar -->
-      <b-row>
-        <div class="text-xs-center" v-if="showProgressGircular">
-          <v-progress-circular indeterminate></v-progress-circular>
-        </div>
+      <b-row v-if="showProgressGircular">
+          <v-progress-circular class="mx-auto" style="filter: invert(26%) sepia(36%) saturate(2827%) hue-rotate(324deg) brightness(101%) contrast(93%); width:8rem; height:8rem;" indeterminate></v-progress-circular>
       </b-row>
 
       <!-- Stepper -->
@@ -17,11 +15,11 @@
       <b-row class="mx-auto">
         <b-button-group size="sm">
           <b-button v-on:click="downloadVoca()">
-            <b-img width="35" height="35" :src="images.memo" alt="btn image" />
+            <b-img :src="images.memo" alt="btn image" class="img-color" />
             <span class="btn-font-size">메모장으로 저장</span>
           </b-button>
           <b-button :state="!validateText.validation" :disabled="!validateText.validation" @click="sendVocaToTable()">
-            <b-img width="35" height="35" :src="validateText.img" alt="btn image" />
+            <b-img :src="validateText.img" alt="btn image" class="img-color" />
             <span class="btn-font-size">단어시험지 만들기</span>
           </b-button>
         </b-button-group>
@@ -110,9 +108,9 @@
         // serverUrl: "http://localhost:5001",
         remoteVocas: [],
         images: {
-          check: require('../assets/check.png'),
-          uncheck: require('../assets/uncheck.png'),
-          memo: require('../assets/memo.png'),
+          check: require('../assets/check.svg'),
+          uncheck: require('../assets/uncheck.svg'),
+          memo: require('../assets/memo.svg'),
           arrow: require('../assets/arrow.svg'),
         },
         buttonGroup: {
