@@ -1,14 +1,12 @@
 
 # TestPaper
 
-> 텍스트 to 단어시험장으로 변환해주는 웹
+> 텍스트를 단어시험장으로 변환하고 단어를 가리거나 섞은 후 인쇄가 가능한 웹
 
 
 link : https://vocatests.herokuapp.com/#/textfield
 
 ## Let's Start
-
-  
 
 ``` bash
 
