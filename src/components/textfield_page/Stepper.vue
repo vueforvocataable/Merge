@@ -64,9 +64,9 @@
         e1: 0,
         isCancel: false,
         images: {
-          step1: require('../assets/step1.png'),
-          step2: require('../assets/step2.png'),
-          step3: require('../assets/step3.png'),
+          step1: require('../../assets/step1.png'),
+          step2: require('../../assets/step2.png'),
+          step3: require('../../assets/step3.png'),
         },
       }
     },

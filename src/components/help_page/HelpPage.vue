@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import Stepper from './Stepper.vue'
+  import Stepper from '../textfield_page/Stepper.vue'
 
   export default {
     name: "ExplanationPage",
@@ -33,8 +33,8 @@
     data() {
       return {
         images: {
-          thumbsUp: require('../assets/thumbs-up.svg'),
-          chrome: require('../assets/chrome.svg'),
+          thumbsUp: require('../../assets/thumbs-up.svg'),
+          chrome: require('../../assets/chrome.svg'),
         },
       }
     },

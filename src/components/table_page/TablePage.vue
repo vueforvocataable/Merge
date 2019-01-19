@@ -69,7 +69,7 @@
     data() {
       return {
         images: {
-          smallcheck: require('../assets/smallcheck.png'),
+          smallcheck: require('../../assets/smallcheck.png'),
         },
         fields: [{
             "class": "indexWidth",

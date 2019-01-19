@@ -77,8 +77,8 @@
       },
       //로컬스토리지에 저장한다
       saveDataOnLocalStorage: function () {
-        if (this.myWords[0] === undefined) return
         let words = this.myWords[0]
+        if (words === undefined || words.vocaHeader === undefined || words.voca === undefined) return
         if (words.vocaHeader.length + words.voca.length < 2) return
 
         localStorage.setItem(Date.now(), JSON.stringify(words))

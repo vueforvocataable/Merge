@@ -1,6 +1,7 @@
-import TextFieldPage from '../components/TextFieldPage.vue';
-import TablePage from '../components/TablePage.vue';
-import HelpPage from '../components/HelpPage.vue'; 
+import TextFieldPage from '../components/textfield_page/TextFieldPage.vue';
+import TablePage from '../components/table_page/TablePage.vue';
+import HelpPage from '../components/help_page/HelpPage.vue'; 
+import PageNotFound from '../components/PageNotFound.vue';
 
 export default [
     {
@@ -19,4 +20,9 @@ export default [
         name: 'help',
         component: HelpPage
     },
+    {
+        path: '*',
+        name: 'pageNotFound',
+        component: PageNotFound
+    }
 ]
